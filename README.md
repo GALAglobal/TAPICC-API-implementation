@@ -1,3 +1,6 @@
+[![Waffle.io - Columns and their card count](https://badge.waffle.io/Alino/TAPICC-API-implementation.svg?columns=all)](https://waffle.io/Alino/TAPICC-API-implementation)
+
+
 # Installation
 download this repository
 
