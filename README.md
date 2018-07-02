@@ -20,3 +20,8 @@ install npm dependencies
 
 # Seeing the swagger documentation
 When you are running the server, you can navigate to http://localhost:1337/docs
+
+# Generating swagger file
+```npm run generateSwagger```
+
+creates or overwrites *swagger.json*

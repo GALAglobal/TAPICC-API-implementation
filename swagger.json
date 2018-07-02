@@ -1,0 +1,1770 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "tapicc-api",
+    "description": "a Sails application",
+    "version": "0.0.0",
+    "contact": {
+      "name": "alino"
+    },
+    "license": {
+      "name": ""
+    }
+  },
+  "host": "localhost:1337",
+  "tags": [
+    {
+      "name": "Swagger"
+    },
+    {
+      "name": "Asset"
+    },
+    {
+      "name": "Job"
+    },
+    {
+      "name": "Task"
+    },
+    {
+      "name": "User"
+    },
+    {
+      "name": "Webhook"
+    }
+  ],
+  "definitions": {
+    "asset": {
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "file": {
+          "type": "string",
+          "format": "binary"
+        },
+        "isReference": {
+          "type": "boolean"
+        },
+        "sourceLanguage": {
+          "type": "string",
+          "format": "string"
+        },
+        "encoding": {
+          "type": "string",
+          "format": "string"
+        },
+        "jobId": {
+          "$ref": "#/definitions/job"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "job": {
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "name": {
+          "type": "string",
+          "format": "string"
+        },
+        "description": {
+          "type": "string",
+          "format": "string"
+        },
+        "submitDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "dueDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "closedDate": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "submitter": {
+          "type": "string",
+          "format": "string"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "task": {
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "type": {
+          "type": "string",
+          "format": "string"
+        },
+        "targetLanguage": {
+          "type": "string",
+          "format": "string"
+        },
+        "assetId": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "progress": {
+          "type": "string",
+          "format": "string"
+        },
+        "assignedTo": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "file": {
+          "type": "string",
+          "format": "binary"
+        },
+        "jobId": {
+          "$ref": "#/definitions/job"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "user": {
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "webhook": {
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "name": {
+          "type": "string",
+          "format": "string"
+        },
+        "description": {
+          "type": "string",
+          "format": "string"
+        },
+        "url": {
+          "type": "string",
+          "format": "string"
+        },
+        "eventType": {
+          "type": "string",
+          "format": "string"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    }
+  },
+  "paths": {
+    "/": {
+      "get": {
+        "summary": "Read Object(s)",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The requested resource"
+          },
+          "404": {
+            "description": "Resource not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "tags": []
+      },
+      "post": {
+        "summary": "Create Object(s)",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The requested resource"
+          },
+          "404": {
+            "description": "Resource not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "tags": []
+      },
+      "put": {
+        "summary": "Update Object(s)",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The requested resource"
+          },
+          "404": {
+            "description": "Resource not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "tags": []
+      },
+      "patch": {
+        "summary": "Update Object(s)",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The requested resource"
+          },
+          "404": {
+            "description": "Resource not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "tags": []
+      },
+      "delete": {
+        "summary": "Destroy Object(s)",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The requested resource"
+          },
+          "404": {
+            "description": "Resource not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "tags": []
+      }
+    },
+    "/job/{id}": {
+      "get": {
+        "summary": "Get a Job",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested resource",
+            "schema": {
+              "$ref": "#/definitions/job"
+            }
+          },
+          "404": {
+            "description": "Resource not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "tags": [
+          "Job"
+        ],
+        "description": "Get a Job"
+      },
+      "put": {
+        "summary": "Update a Job",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "job",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/job"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested resource",
+            "schema": {
+              "$ref": "#/definitions/job"
+            }
+          },
+          "404": {
+            "description": "Resource not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "tags": [
+          "Job"
+        ],
+        "description": "Update a Job"
+      },
+      "delete": {
+        "summary": "Delete a Job",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested resource",
+            "schema": {
+              "$ref": "#/definitions/job"
+            }
+          },
+          "404": {
+            "description": "Resource not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "tags": [
+          "Job"
+        ],
+        "description": "Delete a Job"
+      }
+    },
+    "/job/{parentid}/asset/{id}": {
+      "get": {
+        "summary": "Get an Asset",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "parentid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested resource",
+            "schema": {
+              "$ref": "#/definitions/asset"
+            }
+          },
+          "404": {
+            "description": "Resource not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "tags": [
+          "Asset",
+          "Job"
+        ],
+        "description": "Get an Asset which belongs to a specific job"
+      },
+      "put": {
+        "summary": "Update an Asset",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "schema": null
+          },
+          {
+            "name": "parentid",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "schema": null
+          },
+          {
+            "name": "asset",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/asset"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested resource",
+            "schema": {
+              "$ref": "#/definitions/asset"
+            }
+          },
+          "404": {
+            "description": "Resource not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "tags": [
+          "Asset",
+          "Job"
+        ],
+        "description": "Update an Asset which belongs to a specific job"
+      },
+      "delete": {
+        "summary": "Delete an Asset",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "parentid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested resource",
+            "schema": {
+              "$ref": "#/definitions/asset"
+            }
+          },
+          "404": {
+            "description": "Resource not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "tags": [
+          "Asset",
+          "Job"
+        ],
+        "description": "Delete an Asset which belongs to a specific job"
+      }
+    },
+    "/job/{parentid}/task/{id}": {
+      "get": {
+        "summary": "Get a Task",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "parentid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested resource",
+            "schema": {
+              "$ref": "#/definitions/task"
+            }
+          },
+          "404": {
+            "description": "Resource not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "tags": [
+          "Task",
+          "Job"
+        ],
+        "description": "Gets a Task which belongs to a specific job"
+      },
+      "put": {
+        "summary": "Update a Task",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "parentid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "task",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/task"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested resource",
+            "schema": {
+              "$ref": "#/definitions/task"
+            }
+          },
+          "404": {
+            "description": "Resource not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "tags": [
+          "Task",
+          "Job"
+        ],
+        "description": "Updates a Task which belongs to a specific job"
+      },
+      "delete": {
+        "summary": "Delete a Task",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "parentid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested resource",
+            "schema": {
+              "$ref": "#/definitions/task"
+            }
+          },
+          "404": {
+            "description": "Resource not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "tags": [
+          "Task",
+          "Job"
+        ],
+        "description": "Deletes a Task which belongs to a specific job"
+      }
+    },
+    "/task/{id}": {
+      "get": {
+        "summary": "Get a Task",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested resource",
+            "schema": {
+              "$ref": "#/definitions/task"
+            }
+          },
+          "404": {
+            "description": "Resource not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "tags": [
+          "Task"
+        ],
+        "description": "Get a Task"
+      },
+      "put": {
+        "summary": "Update a Task",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "task",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/task"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested resource",
+            "schema": {
+              "$ref": "#/definitions/task"
+            }
+          },
+          "404": {
+            "description": "Resource not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "tags": [
+          "Task"
+        ],
+        "description": "Update a Task"
+      },
+      "delete": {
+        "summary": "Delete a Task",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested resource",
+            "schema": {
+              "$ref": "#/definitions/task"
+            }
+          },
+          "404": {
+            "description": "Resource not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "tags": [
+          "Task"
+        ],
+        "description": "Delete a Task"
+      }
+    },
+    "/asset/{id}": {
+      "get": {
+        "summary": "Get an Asset",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested resource",
+            "schema": {
+              "$ref": "#/definitions/asset"
+            }
+          },
+          "404": {
+            "description": "Resource not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "tags": [
+          "Asset"
+        ],
+        "description": "Get an Asset"
+      },
+      "put": {
+        "summary": "Update an Asset",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "asset",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/asset"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested resource",
+            "schema": {
+              "$ref": "#/definitions/asset"
+            }
+          },
+          "404": {
+            "description": "Resource not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "tags": [
+          "Asset"
+        ],
+        "description": "Update an Asset"
+      },
+      "delete": {
+        "summary": "Delete an Asset",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested resource",
+            "schema": {
+              "$ref": "#/definitions/asset"
+            }
+          },
+          "404": {
+            "description": "Resource not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "tags": [
+          "Asset"
+        ],
+        "description": "Delete an Asset"
+      }
+    },
+    "/webhook/{id}": {
+      "get": {
+        "summary": "Get a Webhook",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested resource",
+            "schema": {
+              "$ref": "#/definitions/webhook"
+            }
+          },
+          "404": {
+            "description": "Resource not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "tags": [
+          "Webhook"
+        ],
+        "description": "Get a Webhook"
+      },
+      "put": {
+        "summary": "Update a Webhook",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "webhook",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/webhook"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested resource",
+            "schema": {
+              "$ref": "#/definitions/webhook"
+            }
+          },
+          "404": {
+            "description": "Resource not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "tags": [
+          "Webhook"
+        ],
+        "description": "Update a Webhook"
+      },
+      "delete": {
+        "summary": "Delete a Webhook",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested resource",
+            "schema": {
+              "$ref": "#/definitions/webhook"
+            }
+          },
+          "404": {
+            "description": "Resource not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "tags": [
+          "Webhook"
+        ],
+        "description": "Delete a Webhook"
+      }
+    },
+    "/swagger/doc": {
+      "get": {
+        "summary": "Read Object(s)",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The requested resource"
+          },
+          "404": {
+            "description": "Resource not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "tags": [
+          "Swagger"
+        ]
+      },
+      "post": {
+        "summary": "Create Object(s)",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The requested resource"
+          },
+          "404": {
+            "description": "Resource not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "tags": [
+          "Swagger"
+        ]
+      },
+      "put": {
+        "summary": "Update Object(s)",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The requested resource"
+          },
+          "404": {
+            "description": "Resource not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "tags": [
+          "Swagger"
+        ]
+      },
+      "patch": {
+        "summary": "Update Object(s)",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The requested resource"
+          },
+          "404": {
+            "description": "Resource not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "tags": [
+          "Swagger"
+        ]
+      },
+      "delete": {
+        "summary": "Destroy Object(s)",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The requested resource"
+          },
+          "404": {
+            "description": "Resource not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "tags": [
+          "Swagger"
+        ]
+      }
+    },
+    "/job": {
+      "get": {
+        "summary": "List all Jobs",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The requested resource",
+            "schema": {
+              "$ref": "#/definitions/job"
+            }
+          },
+          "404": {
+            "description": "Resource not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "tags": [
+          "Job"
+        ],
+        "description": "List all Jobs"
+      },
+      "post": {
+        "summary": "Create a Job",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "job",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/job"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested resource",
+            "schema": {
+              "$ref": "#/definitions/job"
+            }
+          },
+          "404": {
+            "description": "Resource not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "tags": [
+          "Job"
+        ],
+        "description": "Create a Job"
+      }
+    },
+    "/job/{parentid}/asset": {
+      "get": {
+        "summary": "List all Assets",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "parentid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested resource",
+            "schema": {
+              "$ref": "#/definitions/asset"
+            }
+          },
+          "404": {
+            "description": "Resource not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "tags": [
+          "Asset",
+          "Job"
+        ],
+        "description": "List all Assets which belongs to a specific job"
+      },
+      "post": {
+        "summary": "Create an Assets",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "parentid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "asset",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/asset"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested resource",
+            "schema": {
+              "$ref": "#/definitions/asset"
+            }
+          },
+          "404": {
+            "description": "Resource not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "tags": [
+          "Asset",
+          "Job"
+        ],
+        "description": "Create an Assets which will belong to a specific job"
+      }
+    },
+    "/job/{parentid}/task": {
+      "get": {
+        "summary": "List all Task",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "parentid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested resource",
+            "schema": {
+              "$ref": "#/definitions/task"
+            }
+          },
+          "404": {
+            "description": "Resource not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "tags": [
+          "Task",
+          "Job"
+        ],
+        "description": "Lists all Task which belong to a specific job"
+      },
+      "post": {
+        "summary": "Create a Task",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "parentid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "task",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/task"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested resource",
+            "schema": {
+              "$ref": "#/definitions/task"
+            }
+          },
+          "404": {
+            "description": "Resource not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "tags": [
+          "Task",
+          "Job"
+        ],
+        "description": "Creates a Task which will belong to a specific job.\n      Task can have these statuses:\n\n      pending - the Task has been created, and it's pending to be reviewed and assigned to someone.\n\n      in progress - the Task has been assigned to someone and is being worked on.\n\n      paused - the Task went from in progress, to paused, because something is blocking the Task, or the assignee has other priorities.\n\n      canceled - someone did cancel this Task.\n\n      finished - the work on this Task is done and deliverableLocation is filled with a path to deliverable.\n      "
+      }
+    },
+    "/job/{parentid}/asset/{id}/downloadfile": {
+      "get": {
+        "summary": "Download an asset file",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "parentid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested resource",
+            "schema": {
+              "$ref": "",
+              "type": "file"
+            }
+          },
+          "404": {
+            "description": "Resource not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "tags": [
+          "Asset",
+          "Job"
+        ],
+        "description": "Download an asset file"
+      }
+    },
+    "/job/{parentid}/task/{id}/downloaddeliverable": {
+      "get": {
+        "summary": "Download deliverable file",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "parentid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deliverable file",
+            "schema": {
+              "$ref": "",
+              "type": "file"
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "file"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Resource not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "tags": [
+          "Task",
+          "Job"
+        ],
+        "description": "Download deliverable file"
+      }
+    },
+    "/task": {
+      "get": {
+        "summary": "List all Tasks",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The requested resource",
+            "schema": {
+              "$ref": "#/definitions/task"
+            }
+          },
+          "404": {
+            "description": "Resource not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "tags": [
+          "Task"
+        ],
+        "description": "List all Tasks"
+      }
+    },
+    "/asset": {
+      "get": {
+        "summary": "List all Assets",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The requested resource",
+            "schema": {
+              "$ref": "#/definitions/asset"
+            }
+          },
+          "404": {
+            "description": "Resource not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "tags": [
+          "Asset"
+        ],
+        "description": "List all Assets"
+      }
+    },
+    "/webhook": {
+      "get": {
+        "summary": "List all Webhooks",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "The requested resource",
+            "schema": {
+              "$ref": "#/definitions/webhook"
+            }
+          },
+          "404": {
+            "description": "Resource not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "tags": [
+          "Webhook"
+        ],
+        "description": "List all Webhooks"
+      },
+      "post": {
+        "summary": "Create a Webhook",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "webhook",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/webhook"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested resource",
+            "schema": {
+              "$ref": "#/definitions/webhook"
+            }
+          },
+          "404": {
+            "description": "Resource not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "tags": [
+          "Webhook"
+        ],
+        "description": "Create a Webhook"
+      }
+    },
+    "/job/{id}/submit": {
+      "post": {
+        "summary": "Submit a Job",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "job",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/job"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested resource",
+            "schema": {
+              "$ref": "#/definitions/job"
+            }
+          },
+          "404": {
+            "description": "Resource not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "tags": [
+          "Job"
+        ],
+        "description": "Submit a Job, optionally with assets and tasks"
+      }
+    },
+    "/job/{parentid}/asset/uploadfile": {
+      "post": {
+        "summary": "Upload an asset file and create an asset",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "parentid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "asset",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/asset"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested resource",
+            "schema": {
+              "$ref": "#/definitions/asset"
+            }
+          },
+          "404": {
+            "description": "Resource not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "tags": [
+          "Asset",
+          "Job"
+        ],
+        "description": "Upload an asset file and create an asset"
+      }
+    },
+    "/job/{parentid}/task/{id}/uploaddeliverable": {
+      "post": {
+        "summary": "Upload deliverable file",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "parentid",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "task",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/task"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested resource",
+            "schema": {
+              "$ref": ""
+            }
+          },
+          "404": {
+            "description": "Resource not found"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        },
+        "tags": [
+          "Task",
+          "Job"
+        ],
+        "description": "Upload deliverable file"
+      }
+    }
+  }
+}

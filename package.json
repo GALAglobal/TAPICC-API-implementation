@@ -1,5 +1,5 @@
 {
-  "name": "TAPICC",
+  "name": "tapicc-api",
   "private": true,
   "version": "0.0.0",
   "description": "a Sails application",
@@ -32,7 +32,8 @@
   },
   "scripts": {
     "debug": "node debug app.js",
-    "start": "ts-node app.js"
+    "start": "ts-node app.js",
+    "generateSwagger": "node generateSwaggerFile.js"
   },
   "main": "app.js",
   "repository": {
