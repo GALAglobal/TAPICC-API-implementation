@@ -10,7 +10,7 @@ this is a work in progress, some things needs to be done first so we can call th
 # Installation
 download this repository
 
-```git clone git@github.com:GALAglobal/TAPICC.git```
+```git clone https://github.com/GALAglobal/TAPICC-API-implementation.git```
 
 navigate into it
 
