@@ -1,4 +1,4 @@
-[![Waffle.io - Columns and their card count](https://badge.waffle.io/Alino/TAPICC-API-implementation.svg?columns=all)](https://waffle.io/Alino/TAPICC-API-implementation)
+[![Waffle.io - Columns and their card count](https://badge.waffle.io/GALAglobal/TAPICC-API-implementation.svg?columns=all)](https://waffle.io/GALAglobal/TAPICC-API-implementation)
 
 # Note
 this is a work in progress, some things needs to be done first so we can call this production ready.
