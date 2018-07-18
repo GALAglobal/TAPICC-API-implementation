@@ -14,7 +14,7 @@ download this repository
 
 navigate into it
 
-```cd cd TAPICC-API-implementation/src```
+```cd TAPICC-API-implementation```
 
 install npm dependencies
 
