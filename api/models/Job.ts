@@ -37,7 +37,7 @@ module.exports = {
     },
 
     submitter: {
-      type: 'numeric'
+      type: 'integer'
     },
 
     assets: {
