@@ -48,6 +48,10 @@ module.exports = {
     tasks: {
       collection: 'task',
       via: 'jobId'
+    },
+
+    externalId: {
+      type: 'string'
     }
 
   }
