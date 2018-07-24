@@ -354,31 +354,6 @@ module.exports.routes = {
     }
   },
 
-  'DELETE /task/:id': {
-    controller: 'TaskController',
-    action: 'destroy',
-    swagger: {
-      summary: 'Delete a Task',
-      description: 'Delete a Task'
-    }
-  },
-  'GET /task/:id': {
-    controller: 'TaskController',
-    action: 'findOne',
-    swagger: {
-      summary: 'Get a Task',
-      description: 'Get a Task'
-    }
-  },
-  'PUT /task/:id': {
-    controller: 'TaskController',
-    action: 'update',
-    swagger: {
-      summary: 'Update a Task',
-      description: 'Update a Task'
-    }
-  },
-
   // asset
   'GET /asset': {
     controller: 'AssetController',
@@ -386,31 +361,6 @@ module.exports.routes = {
     swagger: {
       summary: 'List all Assets',
       description: 'List all Assets'
-    }
-  },
-
-  'DELETE /asset/:id': {
-    controller: 'AssetController',
-    action: 'destroy',
-    swagger: {
-      summary: 'Delete an Asset',
-      description: 'Delete an Asset'
-    }
-  },
-  'GET /asset/:id': {
-    controller: 'AssetController',
-    action: 'findOne',
-    swagger: {
-      summary: 'Get an Asset',
-      description: 'Get an Asset'
-    }
-  },
-  'PUT /asset/:id': {
-    controller: 'AssetController',
-    action: 'update',
-    swagger: {
-      summary: 'Update an Asset',
-      description: 'Update an Asset'
     }
   },
 
