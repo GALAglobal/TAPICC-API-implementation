@@ -17,7 +17,8 @@ module.exports = {
 
     name: {
       type: 'string',
-      required: true
+      required: true,
+      description: 'name of a Job'
     },
 
     description: {
@@ -25,19 +26,23 @@ module.exports = {
     },
 
     submitDate: {
-      type: 'datetime'
+      type: 'datetime',
+      description: 'a date when the Job was submit'
     },
 
     dueDate: {
-      type: 'datetime'
+      type: 'datetime',
+      description: 'a date with a deadline'
     },
 
     closedDate: {
-      type: 'datetime'
+      type: 'datetime',
+      description: 'a date when the Job was closed'
     },
 
     submitter: {
-      type: 'integer'
+      type: 'integer',
+      description: 'id of the user who did submit the Job'
     },
 
     assets: {
@@ -51,9 +56,17 @@ module.exports = {
     },
 
     externalId: {
-      type: 'string'
+      type: 'string',
+      description: 'external project id, as is defined on the external system'
     }
 
+  },
+
+  // custom validation functions
+  types: {
+    // This is a workaround for having description in the attributes.
+    // Otherwise there would be an error.
+    description: () => true
   }
 };
 

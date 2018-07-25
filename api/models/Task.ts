@@ -21,7 +21,8 @@ export = {
     },
 
     targetLanguage: {
-      type: 'string'
+      type: 'string',
+      description: 'language code of the target'
     },
 
     assetId: {
@@ -34,18 +35,25 @@ export = {
     },
 
     assignedTo: {
-      // user Id
-      type: 'integer'
+      type: 'integer',
+      description: 'id of the user who it is assigned to'
     },
 
     file: {
-      // deliverable
-      type: 'binary'
+      type: 'binary',
+      description: 'an actual file (deliverable)'
     },
 
     jobId: {
       model: 'job'
     }
+  },
+
+  // custom validation functions
+  types: {
+    // This is a workaround for having description in the attributes.
+    // Otherwise there would be an error.
+    description: () => true
   }
 };
 

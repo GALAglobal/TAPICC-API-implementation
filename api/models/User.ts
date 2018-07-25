@@ -9,6 +9,13 @@ module.exports = {
 
   attributes: {
     
+  },
+
+  // custom validation functions
+  types: {
+    // This is a workaround for having description in the attributes.
+    // Otherwise there would be an error.
+    description: () => true
   }
 };
 

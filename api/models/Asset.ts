@@ -16,24 +16,35 @@ module.exports = {
     },
 
     file: {
-      type: 'binary'
+      type: 'binary',
+      description: 'an actual file (asset)'
     },
 
     isReference: {
-      type: 'boolean'
+      type: 'boolean',
+      description: 'if is set to true, then the Asset is not suppossed to be actionable.'
     },
 
     sourceLanguage: {
-      type: 'string'
+      type: 'string',
+      description: 'language code of the source'
     },
 
     encoding: {
-      type: 'string'
+      type: 'string',
+      description: 'encoding code'
     },
 
     jobId: {
       model: 'job'
     }
+  },
+
+  // custom validation functions
+  types: {
+    // This is a workaround for having description in the attributes.
+    // Otherwise there would be an error.
+    description: () => true
   }
 };
 
