@@ -62,7 +62,10 @@ module.exports.routes = {
     action: 'create',
     swagger: {
       summary: 'Create a Job',
-      description: 'Create a Job'
+      description: 'Create a Job',
+      schema: {
+        $ref: "#/definitions/job"
+      }
     }
   },
 
