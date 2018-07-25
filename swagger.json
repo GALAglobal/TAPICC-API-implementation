@@ -3,7 +3,7 @@
   "info": {
     "title": "tapicc-api",
     "description": "a Sails application",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "contact": {
       "name": "alino"
     },
@@ -41,17 +41,21 @@
         },
         "file": {
           "type": "string",
+          "description": "an actual file (asset)",
           "format": "binary"
         },
         "isReference": {
-          "type": "boolean"
+          "type": "boolean",
+          "description": "if is set to true, then the Asset is not suppossed to be actionable."
         },
         "sourceLanguage": {
           "type": "string",
+          "description": "language code of the source",
           "format": "string"
         },
         "encoding": {
           "type": "string",
+          "description": "encoding code",
           "format": "string"
         },
         "jobId": {
@@ -75,6 +79,8 @@
         },
         "name": {
           "type": "string",
+          "description": "name of a Job",
+          "required": true,
           "format": "string"
         },
         "description": {
@@ -83,19 +89,28 @@
         },
         "submitDate": {
           "type": "string",
+          "description": "a date when the Job was submit",
           "format": "date-time"
         },
         "dueDate": {
           "type": "string",
+          "description": "a date with a deadline",
           "format": "date-time"
         },
         "closedDate": {
           "type": "string",
+          "description": "a date when the Job was closed",
           "format": "date-time"
         },
         "submitter": {
           "type": "integer",
+          "description": "id of the user who did submit the Job",
           "format": "int32"
+        },
+        "externalId": {
+          "type": "string",
+          "description": "external project id, as is defined on the external system",
+          "format": "string"
         },
         "createdAt": {
           "type": "string",
@@ -105,7 +120,10 @@
           "type": "string",
           "format": "date-time"
         }
-      }
+      },
+      "required": [
+        "name"
+      ]
     },
     "task": {
       "properties": {
@@ -115,10 +133,17 @@
         },
         "type": {
           "type": "string",
+          "enum": [
+            "translation",
+            "machine translation",
+            "modification",
+            "proof"
+          ],
           "format": "string"
         },
         "targetLanguage": {
           "type": "string",
+          "description": "language code of the target",
           "format": "string"
         },
         "assetId": {
@@ -127,14 +152,23 @@
         },
         "progress": {
           "type": "string",
+          "enum": [
+            "pending",
+            "in progress",
+            "paused",
+            "canceled",
+            "finished"
+          ],
           "format": "string"
         },
         "assignedTo": {
           "type": "integer",
+          "description": "id of the user who it is assigned to",
           "format": "int32"
         },
         "file": {
           "type": "string",
+          "description": "an actual file (deliverable)",
           "format": "binary"
         },
         "jobId": {
@@ -174,6 +208,7 @@
         },
         "name": {
           "type": "string",
+          "description": "name of the Webhook",
           "format": "string"
         },
         "description": {
@@ -182,10 +217,23 @@
         },
         "url": {
           "type": "string",
+          "description": "url which the server will make a request to when an event occurs",
           "format": "string"
         },
         "eventType": {
           "type": "string",
+          "description": "type of event - if this event occurs, then the \"url\" will be requested by the TAPICC server",
+          "enum": [
+            "taskCreated",
+            "taskUpdated",
+            "taskDeleted",
+            "jobCreated",
+            "jobUpdated",
+            "jobDeleted",
+            "assetCreated",
+            "assetUpdated",
+            "assetDeleted"
+          ],
           "format": "string"
         },
         "createdAt": {
@@ -1002,7 +1050,10 @@
         "tags": [
           "Job"
         ],
-        "description": "Create a Job"
+        "description": "Create a Job",
+        "schema": {
+          "$ref": "#/definitions/job"
+        }
       }
     },
     "/job/{parentid}/asset": {
