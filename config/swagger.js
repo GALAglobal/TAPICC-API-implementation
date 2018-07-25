@@ -6,5 +6,10 @@ module.exports.swagger = {
     host: 'localhost:1337',
     ui: {
         url: 'http://localhost:1337/docs'
+    },
+    definitions: {
+        job: {
+            required: ['name']
+        }
     }
 };
