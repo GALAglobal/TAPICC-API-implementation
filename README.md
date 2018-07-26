@@ -18,7 +18,7 @@ navigate into it
 
 install npm dependencies
 
-```npm install```
+```yarn install```
 
 # Running
 ```npm start```
