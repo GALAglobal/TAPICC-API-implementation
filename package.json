@@ -20,7 +20,7 @@
   "scripts": {
     "debug": "node debug app.js",
     "start": "ts-node app.js",
-    "test": "ts-node ./node_modules/mocha/bin/mocha --compilers ts:ts-node/register tests/bootstrap.test.js tests/integration/**/*.test.js",
+    "test": "ts-node node_modules/mocha/bin/mocha test/bootstrap.test.js test/integration/**/*.test.js",
     "generateSwagger": "node generateSwaggerFile.js"
   },
   "main": "app.js",

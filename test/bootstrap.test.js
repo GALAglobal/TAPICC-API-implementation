@@ -16,6 +16,12 @@ before(function(done) {
       models: {
         connection: 'testDB'
       },
+      hooks: {
+        grunt: false
+      },
+      log: {
+        level: 'error'
+      }
   }, function(err) {
     if (err) return done(err);
     // here you can load fixtures, etc.
