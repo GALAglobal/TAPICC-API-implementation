@@ -11,7 +11,7 @@
     "rc": "1.0.1",
     "sails": "~0.12.14",
     "sails-disk": "~0.10.9",
-    "sails-swagger-alino": "1.1.8",
+    "sails-swagger-alino": "1.1.9",
     "sails-typings": "^0.2.3",
     "ts-node": "^5.0.0",
     "typescript": "^2.7.2",
