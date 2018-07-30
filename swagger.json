@@ -37,6 +37,7 @@
       "properties": {
         "id": {
           "type": "integer",
+          "description": "(auto-generated)",
           "format": "int32"
         },
         "file": {
@@ -61,6 +62,12 @@
         "jobId": {
           "$ref": "#/definitions/job"
         },
+        "tasks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/task"
+          }
+        },
         "createdAt": {
           "type": "string",
           "format": "date-time"
@@ -75,12 +82,12 @@
       "properties": {
         "id": {
           "type": "integer",
+          "description": "(auto-generated)",
           "format": "int32"
         },
         "name": {
           "type": "string",
           "description": "name of a Job",
-          "required": true,
           "format": "string"
         },
         "description": {
@@ -89,7 +96,7 @@
         },
         "submitDate": {
           "type": "string",
-          "description": "a date when the Job was submit",
+          "description": "a date when the Job was submit (auto-generated)",
           "format": "date-time"
         },
         "dueDate": {
@@ -103,9 +110,17 @@
           "format": "date-time"
         },
         "submitter": {
-          "type": "integer",
-          "description": "id of the user who did submit the Job",
-          "format": "int32"
+          "type": "string",
+          "description": "\"server name / id\" of the user who did submit the Job",
+          "example": "symfonie.com/43920149320",
+          "required": true,
+          "format": "string"
+        },
+        "assets": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/asset"
+          }
         },
         "externalId": {
           "type": "string",
@@ -122,13 +137,14 @@
         }
       },
       "required": [
-        "name"
+        "submitter"
       ]
     },
     "task": {
       "properties": {
         "id": {
           "type": "integer",
+          "description": "(auto-generated)",
           "format": "int32"
         },
         "type": {
@@ -139,16 +155,13 @@
             "modification",
             "proof"
           ],
+          "required": true,
           "format": "string"
         },
         "targetLanguage": {
           "type": "string",
           "description": "language code of the target",
           "format": "string"
-        },
-        "assetId": {
-          "type": "integer",
-          "format": "int32"
         },
         "progress": {
           "type": "string",
@@ -162,9 +175,10 @@
           "format": "string"
         },
         "assignedTo": {
-          "type": "integer",
-          "description": "id of the user who it is assigned to",
-          "format": "int32"
+          "type": "string",
+          "description": "\"server name / id\" of the user who it is assigned to",
+          "example": "symfonie.com/43920149320",
+          "format": "string"
         },
         "file": {
           "type": "string",
@@ -174,6 +188,9 @@
         "jobId": {
           "$ref": "#/definitions/job"
         },
+        "assetId": {
+          "$ref": "#/definitions/asset"
+        },
         "createdAt": {
           "type": "string",
           "format": "date-time"
@@ -182,7 +199,10 @@
           "type": "string",
           "format": "date-time"
         }
-      }
+      },
+      "required": [
+        "type"
+      ]
     },
     "user": {
       "properties": {
@@ -204,6 +224,7 @@
       "properties": {
         "id": {
           "type": "integer",
+          "description": "(auto-generated)",
           "format": "int32"
         },
         "name": {
@@ -218,6 +239,7 @@
         "url": {
           "type": "string",
           "description": "url which the server will make a request to when an event occurs",
+          "required": true,
           "format": "string"
         },
         "eventType": {
@@ -234,6 +256,7 @@
             "assetUpdated",
             "assetDeleted"
           ],
+          "required": true,
           "format": "string"
         },
         "createdAt": {
@@ -244,7 +267,11 @@
           "type": "string",
           "format": "date-time"
         }
-      }
+      },
+      "required": [
+        "eventType",
+        "url"
+      ]
     }
   },
   "paths": {
@@ -613,7 +640,7 @@
         "description": "Delete an Asset which belongs to a specific job"
       }
     },
-    "/job/{parentid}/task/{id}": {
+    "/asset/{parentid}/task/{id}": {
       "get": {
         "summary": "Get a Task",
         "consumes": [
@@ -652,7 +679,7 @@
         },
         "tags": [
           "Task",
-          "Job"
+          "Asset"
         ],
         "description": "Gets a Task which belongs to a specific job"
       },
@@ -702,7 +729,7 @@
         },
         "tags": [
           "Task",
-          "Job"
+          "Asset"
         ],
         "description": "Updates a Task which belongs to a specific job"
       },
@@ -744,7 +771,7 @@
         },
         "tags": [
           "Task",
-          "Job"
+          "Asset"
         ],
         "description": "Deletes a Task which belongs to a specific job"
       }
@@ -1138,7 +1165,7 @@
         "description": "Create an Assets which will belong to a specific job"
       }
     },
-    "/job/{parentid}/task": {
+    "/asset/{parentid}/task": {
       "get": {
         "summary": "List all Task",
         "consumes": [
@@ -1171,7 +1198,7 @@
         },
         "tags": [
           "Task",
-          "Job"
+          "Asset"
         ],
         "description": "Lists all Task which belong to a specific job"
       },
@@ -1215,7 +1242,7 @@
         },
         "tags": [
           "Task",
-          "Job"
+          "Asset"
         ],
         "description": "Creates a Task which will belong to a specific job.\n      Task can have these statuses:\n\n      pending - the Task has been created, and it's pending to be reviewed and assigned to someone.\n\n      in progress - the Task has been assigned to someone and is being worked on.\n\n      paused - the Task went from in progress, to paused, because something is blocking the Task, or the assignee has other priorities.\n\n      canceled - someone did cancel this Task.\n\n      finished - the work on this Task is done and deliverableLocation is filled with a path to deliverable.\n      "
       }
@@ -1265,7 +1292,7 @@
         "description": "Download an asset file"
       }
     },
-    "/job/{parentid}/task/{id}/downloaddeliverable": {
+    "/asset/{parentid}/task/{id}/downloaddeliverable": {
       "get": {
         "summary": "Download deliverable file",
         "consumes": [
@@ -1312,7 +1339,7 @@
         },
         "tags": [
           "Task",
-          "Job"
+          "Asset"
         ],
         "description": "Download deliverable file"
       }
@@ -1535,7 +1562,7 @@
         "description": "Upload an asset file and create an asset"
       }
     },
-    "/job/{parentid}/task/{id}/uploaddeliverable": {
+    "/asset/{parentid}/task/{id}/uploaddeliverable": {
       "post": {
         "summary": "Upload deliverable file",
         "consumes": [
@@ -1582,7 +1609,7 @@
         },
         "tags": [
           "Task",
-          "Job"
+          "Asset"
         ],
         "description": "Upload deliverable file"
       }
