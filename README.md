@@ -31,3 +31,6 @@ When you are running the server, you can navigate to http://localhost:1337/docs
 ```npm run generateSwagger```
 
 creates or overwrites *swagger.json*
+
+# Testing
+```npm test```
