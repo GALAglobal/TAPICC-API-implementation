@@ -94,7 +94,7 @@ module.exports.routes = {
     }
   },
 
-  'POST /job/:id/submit': // todo -> add tasks and assets as optional parameters
+  'POST /job/:id/submit':
     {
       controller: 'JobController',
       action: 'create',
@@ -190,7 +190,7 @@ module.exports.routes = {
     }
   },
 
-  'DELETE /job/:parentid/task/:id': {
+  'DELETE /asset/:parentid/task/:id': {
     controller: 'TaskController',
     action: 'destroy',
     swagger: {
@@ -201,7 +201,7 @@ module.exports.routes = {
       ]
     }
   },
-  'GET /job/:parentid/task/:id': {
+  'GET /asset/:parentid/task/:id': {
     controller: 'TaskController',
     action: 'findOne',
     swagger: {
@@ -212,7 +212,7 @@ module.exports.routes = {
       ]
     }
   },
-  'PUT /job/:parentid/task/:id': {
+  'PUT /asset/:parentid/task/:id': {
     controller: 'TaskController',
     action: 'update',
     swagger: {
@@ -223,7 +223,7 @@ module.exports.routes = {
       ]
     }
   },
-  'GET /job/:parentid/task': {
+  'GET /asset/:parentid/task': {
     controller: 'TaskController',
     action: 'find',
     swagger: {
@@ -234,7 +234,7 @@ module.exports.routes = {
       ]
     }
   },
-  'POST /job/:parentid/task': {
+  'POST /asset/:parentid/task': {
     controller: 'TaskController',
     action: 'create',
     swagger: {
@@ -297,7 +297,7 @@ module.exports.routes = {
       }
     }
   },
-  'POST /job/:parentid/task/:id/uploaddeliverable': {
+  'POST /asset/:parentid/task/:id/uploaddeliverable': {
     controller: 'TaskController',
     action: 'uploadFile',
     swagger: {
@@ -315,7 +315,7 @@ module.exports.routes = {
       }
     }
   },
-  'GET /job/:parentid/task/:id/downloaddeliverable': {
+  'GET /asset/:parentid/task/:id/downloaddeliverable': {
     controller: 'TaskController',
     action: 'downloadFile',
     swagger: {
