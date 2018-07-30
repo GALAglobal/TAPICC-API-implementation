@@ -2506,9 +2506,9 @@ load-json-file@^1.0.0:
     pinkie-promise "^2.0.0"
     strip-bom "^2.0.0"
 
-"lodash-new@git://github.com/lodash/lodash.git#4.17.10":
+"lodash-new@git://github.com/lodash/lodash#4.17.10":
   version "4.17.10"
-  resolved "git://github.com/lodash/lodash.git#67389a8c78975d97505fa15aa79bec6397749807"
+  resolved "git://github.com/lodash/lodash#67389a8c78975d97505fa15aa79bec6397749807"
 
 lodash._basecopy@^3.0.0:
   version "3.0.1"
