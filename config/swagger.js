@@ -9,7 +9,15 @@ module.exports.swagger = {
     },
     definitions: {
         job: {
-            required: ['name']
+            required: ['submitter']
+        },
+        task: {
+            required: ['type']
+        },
+        webhook: {
+            required: ['eventType', 'url']
         }
-    }
+    },
+    // todo -> make this work
+    ignoredRoutes: ['/swagger/doc']
 };
