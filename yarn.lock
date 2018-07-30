@@ -3809,9 +3809,9 @@ sails-stringfile@~0.3.2:
     colors "*"
     lodash "~2.4.1"
 
-sails-swagger-alino@^1.1.7:
-  version "1.1.7"
-  resolved "https://registry.yarnpkg.com/sails-swagger-alino/-/sails-swagger-alino-1.1.7.tgz#2acbcf23f43ff9fcd6ab651fea29040175c8a285"
+sails-swagger-alino@1.1.8:
+  version "1.1.8"
+  resolved "https://registry.yarnpkg.com/sails-swagger-alino/-/sails-swagger-alino-1.1.8.tgz#59f8709b0f0811036941934b05f4779c749879b9"
   dependencies:
     del "^3.0.0"
     hoek "^2.14.0"
