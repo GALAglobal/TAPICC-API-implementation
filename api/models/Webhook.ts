@@ -12,7 +12,8 @@ module.exports = {
       type: 'integer',
       autoIncrement: true,
       unique: true,
-      primaryKey: true
+      primaryKey: true,
+      description: '(auto-generated)'
     },
 
     name: {
@@ -26,7 +27,8 @@ module.exports = {
 
     url: {
       type: 'string',
-      description: 'url which the server will make a request to when an event occurs'
+      description: 'url which the server will make a request to when an event occurs',
+      required: true
     },
 
     eventType: {
@@ -42,7 +44,8 @@ module.exports = {
         'assetUpdated',
         'assetDeleted'
       ],
-      description: 'type of event - if this event occurs, then the "url" will be requested by the TAPICC server'
+      description: 'type of event - if this event occurs, then the "url" will be requested by the TAPICC server',
+      required: true
     }
   },
 
