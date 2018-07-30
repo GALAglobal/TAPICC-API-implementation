@@ -12,12 +12,12 @@ module.exports = {
       type: 'integer',
       autoIncrement: true,
       unique: true,
-      primaryKey: true
+      primaryKey: true,
+      description: '(auto-generated)'
     },
 
     name: {
       type: 'string',
-      required: true,
       description: 'name of a Job'
     },
 
@@ -27,7 +27,7 @@ module.exports = {
 
     submitDate: {
       type: 'datetime',
-      description: 'a date when the Job was submit'
+      description: 'a date when the Job was submit (auto-generated)'
     },
 
     dueDate: {
@@ -41,17 +41,14 @@ module.exports = {
     },
 
     submitter: {
-      type: 'integer',
-      description: 'id of the user who did submit the Job'
+      type: 'string',
+      description: '"server name / id" of the user who did submit the Job',
+      required: true,
+      example: 'symfonie.com/43920149320'
     },
 
     assets: {
       collection: 'asset',
-      via: 'jobId'
-    },
-
-    tasks: {
-      collection: 'task',
       via: 'jobId'
     },
 
@@ -66,7 +63,8 @@ module.exports = {
   types: {
     // This is a workaround for having description in the attributes.
     // Otherwise there would be an error.
-    description: () => true
+    description: () => true,
+    example: () => true
   }
 };
 

@@ -12,7 +12,8 @@ module.exports = {
       type: 'integer',
       autoIncrement: true,
       unique: true,
-      primaryKey: true
+      primaryKey: true,
+      description: '(auto-generated)'
     },
 
     file: {
@@ -37,6 +38,11 @@ module.exports = {
 
     jobId: {
       model: 'job'
+    },
+
+    tasks: {
+      collection: 'task',
+      via: 'assetId'
     }
   },
 

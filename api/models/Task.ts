@@ -12,21 +12,19 @@ export = {
       type: 'integer',
       autoIncrement: true,
       unique: true,
-      primaryKey: true
+      primaryKey: true,
+      description: '(auto-generated)'
     },
 
     type: {
       type: 'string',
-      enum: ['translation', 'machine translation', 'modification', 'proof']
+      enum: ['translation', 'machine translation', 'modification', 'proof'],
+      required: true
     },
 
     targetLanguage: {
       type: 'string',
       description: 'language code of the target'
-    },
-
-    assetId: {
-      type: 'integer'
     },
 
     progress: {
@@ -35,8 +33,9 @@ export = {
     },
 
     assignedTo: {
-      type: 'integer',
-      description: 'id of the user who it is assigned to'
+      type: 'string',
+      description: '"server name / id" of the user who it is assigned to',
+      example: 'symfonie.com/43920149320'
     },
 
     file: {
@@ -46,6 +45,10 @@ export = {
 
     jobId: {
       model: 'job'
+    },
+
+    assetId: {
+      model: 'asset'
     }
   },
 
