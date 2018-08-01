@@ -19,5 +19,5 @@ module.exports.swagger = {
         }
     },
     // todo -> make this work
-    ignoredRoutes: ['/swagger/doc', '/']
+    ignoredRoutes: ['/swagger/doc']
 };
