@@ -29,7 +29,17 @@ export = {
 
     progress: {
       type: 'string',
-      enum: ['pending', 'in progress', 'paused', 'canceled', 'finished']
+      enum: ['pending', 'in progress', 'paused', 'canceled', 'finished'],
+      defaultsTo: 'pending',
+      description: `pending - the Task has been created, and it's pending to be reviewed and assigned to someone.
+
+in progress - the Task has been assigned to someone and is being worked on.
+
+paused - the Task went from in progress, to paused, because something is blocking the Task, or the assignee has other priorities.
+
+canceled - someone did cancel this Task.
+
+finished - the work on this Task is done and deliverableLocation is filled with a path to deliverable.`
     },
 
     assignedTo: {
