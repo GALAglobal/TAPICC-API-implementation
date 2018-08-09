@@ -69,14 +69,14 @@ module.exports.routes = {
   },
 
   'POST /job/:id/submit':
-    {
-      controller: 'JobController',
-      action: 'create',
-      swagger: {
-        summary: 'Submit a Job',
-        description: 'Submit a Job, optionally with assets and tasks'
-      }
-    },
+  {
+    controller: 'JobController',
+    action: 'create',
+    swagger: {
+      summary: 'Submit a Job',
+      description: 'Submit a Job, optionally with assets and tasks'
+    }
+  },
 
   'DELETE /job/:parentid/asset/:id': {
     controller: 'AssetController',
@@ -220,26 +220,47 @@ module.exports.routes = {
     }
   },
 
-  // todo -> make file upload and download work
-  'POST /job/:parentid/asset/uploadfile': // todo -> this endpoint also creates an asset
-    {
-      controller: 'AssetController',
-      action: 'uploadFile',
-      swagger: {
-        summary: 'Upload an asset file and create an asset',
-        description: 'Upload an asset file and create an asset',
-        tags: [
-          'Asset'
-        ],
-        responses: {
-          '200': {
-            schema: {
-              "$ref": "#/definitions/asset",
-            }
+  'POST /job/:parentid/asset/uploadfile':
+  {
+    controller: 'AssetController',
+    action: 'uploadFile',
+    swagger: {
+      summary: 'Upload an asset file and create an asset',
+      description: 'Upload an asset file and create an asset',
+      parameters: [
+        {
+          "name": "parentid",
+          "in": "path",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "sourceLanguage",
+          "in": "formData",
+          "type": "string"
+        },
+        {
+          "name": "encoding",
+          "in": "formData",
+          "type": "string"
+        },
+        {
+          "name": "asset",
+          "in": "formData",
+          "description": "The Asset file",
+          "required": true,
+          "type": "file"
+        },
+      ],
+      responses: {
+        '200': {
+          schema: {
+            "$ref": "#/definitions/asset",
           }
         }
       }
-    },
+    }
+  },
   'GET /job/:parentid/asset/:id/downloadfile': {
     controller: 'AssetController',
     action: 'downloadFile',
@@ -250,127 +271,139 @@ module.exports.routes = {
         'Asset'
       ],
       responses: {
-        '200': {
+        200: {
+          description: "The asset file",
           schema: {
-            "$ref": "",
-            type: 'file'
+            type: "file"
           }
         }
       }
     }
   },
-  'POST /asset/:parentid/task/:id/uploaddeliverable': {
-    controller: 'TaskController',
-    action: 'uploadFile',
-    swagger: {
-      summary: 'Upload deliverable file',
-      description: 'Upload deliverable file',
-      tags: [
-        'Task'
-      ],
-      responses: {
-        '200': {
-          schema: {
-            "$ref": ""
-          }
-        }
-      }
-    }
-  },
-  'GET /asset/:parentid/task/:id/downloaddeliverable': {
-    controller: 'TaskController',
-    action: 'downloadFile',
-    swagger: {
-      summary: 'Download deliverable file',
-      description: 'Download deliverable file',
-      produces: [
-        'application/json'
-      ],
-      tags: [
-        'Task'
-      ],
-      responses: {
-        '200': {
-          description: 'Deliverable file',
-          schema: {
-            "$ref": "",
-            type: 'file'
+    'POST /asset/:parentid/task/:id/uploaddeliverable': {
+      controller: 'TaskController',
+      action: 'uploadFile',
+      swagger: {
+        summary: 'Upload deliverable file',
+        description: 'Upload deliverable file',
+        tags: [
+          'Task'
+        ],
+        parameters: [
+          {
+            "name": "parentid",
+            "in": "path",
+            "required": true,
+            "type": "string"
           },
-          content: {
-            'application/json': {
-              schema: {
-                type: 'file'
-              }
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "deliverable",
+            "in": "formData",
+            "description": "The deliverable file",
+            "required": true,
+            "type": "file"
+          },
+        ],
+        responses: {
+          '200': {
+            schema: {
+              "$ref": "#/definitions/task",
             }
           }
         }
       }
+    },
+    'GET /asset/:parentid/task/:id/downloaddeliverable': {
+      controller: 'TaskController',
+      action: 'downloadFile',
+      swagger: {
+        summary: 'Download deliverable file',
+        description: 'Download deliverable file',
+        produces: [
+          'application/json'
+        ],
+        tags: [
+          'Task'
+        ],
+        responses: {
+          200: {
+            description: "The deliverable file",
+            schema: {
+              type: "file"
+            }
+          }
+        }
+      }
+    },
 
-    }
-  },
+    // task
+    'GET /task': {
+      controller: 'TaskController',
+      action: 'find',
+      swagger: {
+        summary: 'List all Tasks',
+        description: 'List all Tasks'
+      }
+    },
 
-  // task
-  'GET /task': {
-    controller: 'TaskController',
-    action: 'find',
-    swagger: {
-      summary: 'List all Tasks',
-      description: 'List all Tasks'
-    }
-  },
+    // asset
+    'GET /asset': {
+      controller: 'AssetController',
+      action: 'find',
+      swagger: {
+        summary: 'List all Assets',
+        description: 'List all Assets'
+      }
+    },
 
-  // asset
-  'GET /asset': {
-    controller: 'AssetController',
-    action: 'find',
-    swagger: {
-      summary: 'List all Assets',
-      description: 'List all Assets'
-    }
-  },
+    // webhook
+    'GET /webhook': {
+      controller: 'WebhookController',
+      action: 'find',
+      swagger: {
+        summary: 'List all Webhooks',
+        description: 'List all Webhooks'
+      }
+    },
+    'POST /webhook': {
+      controller: 'WebhookController',
+      action: 'create',
+      swagger: {
+        summary: 'Create a Webhook',
+        description: 'Create a Webhook'
+      }
+    },
 
-  // webhook
-  'GET /webhook': {
-    controller: 'WebhookController',
-    action: 'find',
-    swagger: {
-      summary: 'List all Webhooks',
-      description: 'List all Webhooks'
+    'DELETE /webhook/:id': {
+      controller: 'WebhookController',
+      action: 'destroy',
+      swagger: {
+        summary: 'Delete a Webhook',
+        description: 'Delete a Webhook'
+      }
+    },
+    'GET /webhook/:id': {
+      controller: 'WebhookController',
+      action: 'findOne',
+      swagger: {
+        summary: 'Get a Webhook',
+        description: 'Get a Webhook'
+      }
+    },
+    'PUT /webhook/:id': {
+      controller: 'WebhookController',
+      action: 'update',
+      swagger: {
+        summary: 'Update a Webhook',
+        description: 'Update a Webhook'
+      }
     }
-  },
-  'POST /webhook': {
-    controller: 'WebhookController',
-    action: 'create',
-    swagger: {
-      summary: 'Create a Webhook',
-      description: 'Create a Webhook'
-    }
-  },
-
-  'DELETE /webhook/:id': {
-    controller: 'WebhookController',
-    action: 'destroy',
-    swagger: {
-      summary: 'Delete a Webhook',
-      description: 'Delete a Webhook'
-    }
-  },
-  'GET /webhook/:id': {
-    controller: 'WebhookController',
-    action: 'findOne',
-    swagger: {
-      summary: 'Get a Webhook',
-      description: 'Get a Webhook'
-    }
-  },
-  'PUT /webhook/:id': {
-    controller: 'WebhookController',
-    action: 'update',
-    swagger: {
-      summary: 'Update a Webhook',
-      description: 'Update a Webhook'
-    }
-  }
 
 
-};
+  };

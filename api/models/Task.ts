@@ -48,9 +48,14 @@ finished - the work on this Task is done and deliverableLocation is filled with 
       example: 'symfonie.com/43920149320'
     },
 
-    file: {
-      type: 'binary',
-      description: 'an actual file (deliverable)'
+    fileDescriptor: {
+      type: 'string',
+      description: 'unique name of the file. (auto-generated)'
+    },
+
+    fileOriginalName: {
+      type: 'string',
+      description: 'original name of the file as uploaded. (auto-filled)'
     },
 
     jobId: {

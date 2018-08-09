@@ -16,9 +16,14 @@ module.exports = {
       description: '(auto-generated)'
     },
 
-    file: {
-      type: 'binary',
-      description: 'an actual file (asset)'
+    fileDescriptor: {
+      type: 'string',
+      description: 'unique name of the file. (auto-generated)'
+    },
+
+    fileOriginalName: {
+      type: 'string',
+      description: 'original name of the file as uploaded. (auto-filled)'
     },
 
     isReference: {
