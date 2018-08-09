@@ -40,10 +40,15 @@
           "description": "(auto-generated)",
           "format": "int32"
         },
-        "file": {
+        "fileDescriptor": {
           "type": "string",
-          "description": "an actual file (asset)",
-          "format": "binary"
+          "description": "unique name of the file. (auto-generated)",
+          "format": "string"
+        },
+        "fileOriginalName": {
+          "type": "string",
+          "description": "original name of the file as uploaded. (auto-filled)",
+          "format": "string"
         },
         "isReference": {
           "type": "boolean",
@@ -165,6 +170,7 @@
         },
         "progress": {
           "type": "string",
+          "description": "pending - the Task has been created, and it's pending to be reviewed and assigned to someone.\n\nin progress - the Task has been assigned to someone and is being worked on.\n\npaused - the Task went from in progress, to paused, because something is blocking the Task, or the assignee has other priorities.\n\ncanceled - someone did cancel this Task.\n\nfinished - the work on this Task is done and deliverableLocation is filled with a path to deliverable.",
           "enum": [
             "pending",
             "in progress",
@@ -172,6 +178,7 @@
             "canceled",
             "finished"
           ],
+          "default": "pending",
           "format": "string"
         },
         "assignedTo": {
@@ -180,10 +187,15 @@
           "example": "symfonie.com/43920149320",
           "format": "string"
         },
-        "file": {
+        "fileDescriptor": {
           "type": "string",
-          "description": "an actual file (deliverable)",
-          "format": "binary"
+          "description": "unique name of the file. (auto-generated)",
+          "format": "string"
+        },
+        "fileOriginalName": {
+          "type": "string",
+          "description": "original name of the file as uploaded. (auto-filled)",
+          "format": "string"
         },
         "jobId": {
           "$ref": "#/definitions/job"
@@ -275,118 +287,6 @@
     }
   },
   "paths": {
-    "/": {
-      "get": {
-        "summary": "Read Object(s)",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "The requested resource"
-          },
-          "404": {
-            "description": "Resource not found"
-          },
-          "500": {
-            "description": "Internal server error"
-          }
-        },
-        "tags": []
-      },
-      "post": {
-        "summary": "Create Object(s)",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "The requested resource"
-          },
-          "404": {
-            "description": "Resource not found"
-          },
-          "500": {
-            "description": "Internal server error"
-          }
-        },
-        "tags": []
-      },
-      "put": {
-        "summary": "Update Object(s)",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "The requested resource"
-          },
-          "404": {
-            "description": "Resource not found"
-          },
-          "500": {
-            "description": "Internal server error"
-          }
-        },
-        "tags": []
-      },
-      "patch": {
-        "summary": "Update Object(s)",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "The requested resource"
-          },
-          "404": {
-            "description": "Resource not found"
-          },
-          "500": {
-            "description": "Internal server error"
-          }
-        },
-        "tags": []
-      },
-      "delete": {
-        "summary": "Destroy Object(s)",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "The requested resource"
-          },
-          "404": {
-            "description": "Resource not found"
-          },
-          "500": {
-            "description": "Internal server error"
-          }
-        },
-        "tags": []
-      }
-    },
     "/job/{id}": {
       "get": {
         "summary": "Get a Job",
@@ -1244,7 +1144,7 @@
           "Task",
           "Asset"
         ],
-        "description": "Creates a Task which will belong to a specific job.\n      Task can have these statuses:\n\n      pending - the Task has been created, and it's pending to be reviewed and assigned to someone.\n\n      in progress - the Task has been assigned to someone and is being worked on.\n\n      paused - the Task went from in progress, to paused, because something is blocking the Task, or the assignee has other priorities.\n\n      canceled - someone did cancel this Task.\n\n      finished - the work on this Task is done and deliverableLocation is filled with a path to deliverable.\n      "
+        "description": "Creates a Task which will belong to a specific job."
       }
     },
     "/job/{parentid}/asset/{id}/downloadfile": {
@@ -1272,9 +1172,9 @@
         ],
         "responses": {
           "200": {
-            "description": "The requested resource",
+            "description": "The asset file",
             "schema": {
-              "$ref": "",
+              "$ref": "#/definitions/asset",
               "type": "file"
             }
           },
@@ -1317,17 +1217,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Deliverable file",
+            "description": "The deliverable file",
             "schema": {
-              "$ref": "",
+              "$ref": "#/definitions/task",
               "type": "file"
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "file"
-                }
-              }
             }
           },
           "404": {
@@ -1530,15 +1423,29 @@
             "name": "parentid",
             "in": "path",
             "required": true,
+            "type": "string",
+            "schema": null
+          },
+          {
+            "name": "sourceLanguage",
+            "in": "formData",
+            "required": true,
+            "schema": null,
             "type": "string"
           },
           {
+            "name": "encoding",
+            "in": "formData",
+            "type": "string",
+            "schema": null
+          },
+          {
             "name": "asset",
-            "in": "body",
+            "in": "formData",
+            "description": "The Asset file",
             "required": true,
-            "schema": {
-              "$ref": "#/definitions/asset"
-            }
+            "type": "file",
+            "schema": null
           }
         ],
         "responses": {
@@ -1576,28 +1483,30 @@
             "name": "parentid",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "schema": null
           },
           {
             "name": "id",
             "in": "path",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "schema": null
           },
           {
-            "name": "task",
-            "in": "body",
+            "name": "deliverable",
+            "in": "formData",
             "required": true,
-            "schema": {
-              "$ref": "#/definitions/task"
-            }
+            "schema": null,
+            "description": "The deliverable file",
+            "type": "file"
           }
         ],
         "responses": {
           "200": {
             "description": "The requested resource",
             "schema": {
-              "$ref": ""
+              "$ref": "#/definitions/task"
             }
           },
           "404": {
