@@ -20,16 +20,20 @@ describe('TaskController', function () {
       type: 'translation'
     }]
   }
-  describe.only('POST /asset/:parentid/task/:id/uploaddeliverable', function () {
+  describe('POST /asset/:parentid/task/:id/uploaddeliverable', function () {
     beforeEach(function (done) {
-      Job.create(fixtures.jobs[0]).then(() => {
+      const cb = () => Job.create(fixtures.jobs[0]).then(() => {
         return Asset.create(fixtures.assets[0])
       }).then(() => {
         return Task.create(fixtures.tasks[0])
       }).then(() => {
         done()
-      })
+      });
+
+      sails.once('hook:orm:reloaded', cb);
+      sails.emit('hook:orm:reload');
     });
+    
 
     it('should upload the deliverable file to an existing Task', function (done) {
 

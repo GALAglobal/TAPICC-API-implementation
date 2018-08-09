@@ -6,7 +6,7 @@ describe('AssetController', function () {
 
   describe('POST /job/:parentid/asset/uploadfile', function () {
     beforeEach(function (done) {
-      Job.create({
+      const cb = () => Job.create({
         id: 1,
         name: 'first job',
         submitter: 'symfonie.com/123'
@@ -14,6 +14,9 @@ describe('AssetController', function () {
         if (err) console.error(err);
         done();
       });
+
+      sails.once('hook:orm:reloaded', cb);
+      sails.emit('hook:orm:reload');
     });
 
     it('should handle file upload and asset creation', function (done) {
