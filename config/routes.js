@@ -23,7 +23,7 @@
 module.exports.routes = {
 
   // job
-  'GET /job': {
+  'GET /jobs': {
     controller: 'JobController',
     action: 'find',
     swagger: {
@@ -31,7 +31,7 @@ module.exports.routes = {
       description: 'List all Jobs'
     }
   },
-  'POST /job': {
+  'POST /jobs': {
     controller: 'JobController',
     action: 'create',
     swagger: {
@@ -43,7 +43,7 @@ module.exports.routes = {
     }
   },
 
-  'DELETE /job/:id': {
+  'DELETE /jobs/:id': {
     controller: 'JobController',
     action: 'destroy',
     swagger: {
@@ -51,7 +51,7 @@ module.exports.routes = {
       description: 'Delete a Job'
     }
   },
-  'GET /job/:id': {
+  'GET /jobs/:id': {
     controller: 'JobController',
     action: 'findOne',
     swagger: {
@@ -59,7 +59,7 @@ module.exports.routes = {
       description: 'Get a Job'
     }
   },
-  'PUT /job/:id': {
+  'PUT /jobs/:id': {
     controller: 'JobController',
     action: 'update',
     swagger: {
@@ -68,7 +68,7 @@ module.exports.routes = {
     }
   },
 
-  'DELETE /job/:parentid/asset/:id': {
+  'DELETE /jobs/:parentid/assets/:id': {
     controller: 'AssetController',
     action: 'destroy',
     swagger: {
@@ -79,7 +79,7 @@ module.exports.routes = {
       ]
     }
   },
-  'GET /job/:parentid/asset/:id': {
+  'GET /jobs/:parentid/assets/:id': {
     controller: 'AssetController',
     action: 'findOne',
     swagger: {
@@ -98,7 +98,7 @@ module.exports.routes = {
       }
     }
   },
-  'PUT /job/:parentid/asset/:id': {
+  'PUT /jobs/:parentid/assets/:id': {
     controller: 'AssetController',
     action: 'update',
     swagger: {
@@ -123,7 +123,7 @@ module.exports.routes = {
       ]
     }
   },
-  'GET /job/:parentid/asset': {
+  'GET /jobs/:parentid/assets': {
     controller: 'AssetController',
     action: 'find',
     swagger: {
@@ -143,7 +143,7 @@ module.exports.routes = {
     }
   },
 
-  'DELETE /asset/:parentid/task/:id': {
+  'DELETE /assets/:parentid/tasks/:id': {
     controller: 'TaskController',
     action: 'destroy',
     swagger: {
@@ -154,7 +154,7 @@ module.exports.routes = {
       ]
     }
   },
-  'GET /asset/:parentid/task/:id': {
+  'GET /assets/:parentid/tasks/:id': {
     controller: 'TaskController',
     action: 'findOne',
     swagger: {
@@ -165,7 +165,7 @@ module.exports.routes = {
       ]
     }
   },
-  'PUT /asset/:parentid/task/:id': {
+  'PUT /assets/:parentid/tasks/:id': {
     controller: 'TaskController',
     action: 'update',
     swagger: {
@@ -176,7 +176,7 @@ module.exports.routes = {
       ]
     }
   },
-  'GET /asset/:parentid/task': {
+  'GET /assets/:parentid/tasks': {
     controller: 'TaskController',
     action: 'find',
     swagger: {
@@ -187,7 +187,7 @@ module.exports.routes = {
       ]
     }
   },
-  'POST /asset/:parentid/task': {
+  'POST /assets/:parentid/tasks': {
     controller: 'TaskController',
     action: 'create',
     swagger: {
@@ -199,7 +199,7 @@ module.exports.routes = {
     }
   },
 
-  'POST /job/:parentid/asset/uploadfile':
+  'POST /jobs/:parentid/assets/uploadfile':
   {
     controller: 'AssetController',
     action: 'uploadFile',
@@ -240,7 +240,7 @@ module.exports.routes = {
       }
     }
   },
-  'GET /job/:parentid/asset/:id/downloadfile': {
+  'GET /jobs/:parentid/assets/:id/downloadfile': {
     controller: 'AssetController',
     action: 'downloadFile',
     swagger: {
@@ -259,7 +259,7 @@ module.exports.routes = {
       }
     }
   },
-    'POST /asset/:parentid/task/:id/uploaddeliverable': {
+    'POST /assets/:parentid/tasks/:id/uploaddeliverable': {
       controller: 'TaskController',
       action: 'uploadFile',
       swagger: {
@@ -298,7 +298,7 @@ module.exports.routes = {
         }
       }
     },
-    'GET /asset/:parentid/task/:id/downloaddeliverable': {
+    'GET /assets/:parentid/tasks/:id/downloaddeliverable': {
       controller: 'TaskController',
       action: 'downloadFile',
       swagger: {
@@ -322,7 +322,7 @@ module.exports.routes = {
     },
 
     // task
-    'GET /task': {
+    'GET /tasks': {
       controller: 'TaskController',
       action: 'find',
       swagger: {
@@ -332,7 +332,7 @@ module.exports.routes = {
     },
 
     // asset
-    'GET /asset': {
+    'GET /assets': {
       controller: 'AssetController',
       action: 'find',
       swagger: {
@@ -342,7 +342,7 @@ module.exports.routes = {
     },
 
     // webhook
-    'GET /webhook': {
+    'GET /webhooks': {
       controller: 'WebhookController',
       action: 'find',
       swagger: {
@@ -350,7 +350,7 @@ module.exports.routes = {
         description: 'List all Webhooks'
       }
     },
-    'POST /webhook': {
+    'POST /webhooks': {
       controller: 'WebhookController',
       action: 'create',
       swagger: {
@@ -359,7 +359,7 @@ module.exports.routes = {
       }
     },
 
-    'DELETE /webhook/:id': {
+    'DELETE /webhooks/:id': {
       controller: 'WebhookController',
       action: 'destroy',
       swagger: {
@@ -367,7 +367,7 @@ module.exports.routes = {
         description: 'Delete a Webhook'
       }
     },
-    'GET /webhook/:id': {
+    'GET /webhooks/:id': {
       controller: 'WebhookController',
       action: 'findOne',
       swagger: {
@@ -375,7 +375,7 @@ module.exports.routes = {
         description: 'Get a Webhook'
       }
     },
-    'PUT /webhook/:id': {
+    'PUT /webhooks/:id': {
       controller: 'WebhookController',
       action: 'update',
       swagger: {
