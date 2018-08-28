@@ -4,7 +4,7 @@ var _ = require('lodash');
 
 describe('AssetController', function () {
 
-  describe('POST /job/:parentid/asset/uploadfile', function () {
+  describe('POST /jobs/:parentid/assets/uploadfile', function () {
     beforeEach(function (done) {
       const cb = () => Job.create({
         id: 1,
@@ -21,7 +21,7 @@ describe('AssetController', function () {
 
     it('should handle file upload and asset creation', function (done) {
       request(sails.hooks.http.app)
-        .post('/job/1/asset/uploadfile')
+        .post('/jobs/1/assets/uploadfile')
         .field('sourceLanguage', 'en')
         .field('encoding', 'utf8')
         .attach('asset', 'test/fixtures/testAssetFile.txt')

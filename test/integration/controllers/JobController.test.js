@@ -7,10 +7,10 @@ describe('JobController', function() {
     sails.emit('hook:orm:reload');
   })
 
-  describe('GET /job', function() {
+  describe('GET /jobs', function() {
     it('should return all Jobs', function (done) {
       request(sails.hooks.http.app)
-        .get('/job')
+        .get('/jobs')
         .expect(200)
         .then((response) => {
           expect(response.body).toEqual([]);

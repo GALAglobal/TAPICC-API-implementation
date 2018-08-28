@@ -20,7 +20,7 @@ describe('TaskController', function () {
       type: 'translation'
     }]
   }
-  describe('POST /asset/:parentid/task/:id/uploaddeliverable', function () {
+  describe('POST /assets/:parentid/tasks/:id/uploaddeliverable', function () {
     beforeEach(function (done) {
       const cb = () => Job.create(fixtures.jobs[0]).then(() => {
         return Asset.create(fixtures.assets[0])
@@ -38,7 +38,7 @@ describe('TaskController', function () {
     it('should upload the deliverable file to an existing Task', function (done) {
 
       request(sails.hooks.http.app)
-        .post('/asset/1/task/1/uploaddeliverable')
+        .post('/assets/1/tasks/1/uploaddeliverable')
         .attach('deliverable', 'test/fixtures/testDeliverableFile.txt')
         .expect(200)
         .then((response) => {
