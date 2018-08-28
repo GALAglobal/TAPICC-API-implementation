@@ -1,0 +1,1196 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "description" : "TAPICC-API swagger definition",
+    "version" : "0.0.7",
+    "title" : "tapicc-api",
+    "contact" : {
+      "name" : "alino"
+    },
+    "license" : {
+      "name" : "BSD-3-Clause"
+    }
+  },
+  "host" : "localhost:1337",
+  "tags" : [ {
+    "name" : "Job"
+  }, {
+    "name" : "Asset"
+  }, {
+    "name" : "Task"
+  }, {
+    "name" : "Webhook"
+  } ],
+  "schemes" : [ "http" ],
+  "paths" : {
+    "/jobs" : {
+      "get" : {
+        "tags" : [ "Job" ],
+        "summary" : "List all Jobs",
+        "description" : "List all Jobs",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "The requested resource",
+            "schema" : {
+              "$ref" : "#/definitions/job"
+            }
+          },
+          "404" : {
+            "description" : "Resource not found"
+          },
+          "500" : {
+            "description" : "Internal server error"
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "Job" ],
+        "summary" : "Create a Job",
+        "description" : "Create a Job",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "job",
+          "required" : true,
+          "schema" : {
+            "example" : {
+              "submitter" : "symfonie.com/43920149320",
+              "name" : "name of a job",
+              "description" : "more detailed information about this job",
+              "externalId" : "external ID of the job (project)",
+              "dueDate" : "2019-08-27T12:07:48.575Z"
+            }
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "The requested resource",
+            "schema" : {
+              "$ref" : "#/definitions/job"
+            }
+          },
+          "404" : {
+            "description" : "Resource not found"
+          },
+          "500" : {
+            "description" : "Internal server error"
+          }
+        }
+      }
+    },
+    "/jobs/{jobId}" : {
+      "get" : {
+        "tags" : [ "Job" ],
+        "summary" : "Get a Job",
+        "description" : "Get a Job",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "jobId",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "The requested resource",
+            "schema" : {
+              "$ref" : "#/definitions/job"
+            }
+          },
+          "404" : {
+            "description" : "Resource not found"
+          },
+          "500" : {
+            "description" : "Internal server error"
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "Job" ],
+        "summary" : "Update a Job",
+        "description" : "Update a Job",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "jobId",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "job",
+          "required" : true,
+          "schema" : {
+            "example" : {
+              "submitter" : "symfonie.com/43920149320",
+              "name" : "name of a job",
+              "description" : "more detailed information about this job",
+              "externalId" : "external ID of the job (project)",
+              "dueDate" : "2019-08-27T12:07:48.575Z"
+            }
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "The requested resource",
+            "schema" : {
+              "$ref" : "#/definitions/job"
+            }
+          },
+          "404" : {
+            "description" : "Resource not found"
+          },
+          "500" : {
+            "description" : "Internal server error"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "Job" ],
+        "summary" : "Delete a Job",
+        "description" : "Delete a Job",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "jobId",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "The requested resource",
+            "schema" : {
+              "$ref" : "#/definitions/job"
+            }
+          },
+          "404" : {
+            "description" : "Resource not found"
+          },
+          "500" : {
+            "description" : "Internal server error"
+          }
+        }
+      }
+    },
+    "/jobs/{jobId}/assets/uploadfile" : {
+      "post" : {
+        "tags" : [ "Asset" ],
+        "summary" : "Upload an asset file and create an asset",
+        "description" : "Upload an asset file and create an asset",
+        "consumes" : [ "multipart/form-data" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "jobId",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "sourceLanguage",
+          "in" : "formData",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "encoding",
+          "in" : "formData",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "asset",
+          "in" : "formData",
+          "description" : "The Asset file",
+          "required" : true,
+          "type" : "file"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "The requested resource",
+            "schema" : {
+              "$ref" : "#/definitions/asset"
+            }
+          },
+          "404" : {
+            "description" : "Resource not found"
+          },
+          "500" : {
+            "description" : "Internal server error"
+          }
+        }
+      }
+    },
+    "/jobs/{jobId}/assets/{assetId}/downloadfile" : {
+      "get" : {
+        "tags" : [ "Asset" ],
+        "summary" : "Download an asset file",
+        "description" : "Download an asset file",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "jobId",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "assetId",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "The asset file"
+          },
+          "404" : {
+            "description" : "Resource not found"
+          },
+          "500" : {
+            "description" : "Internal server error"
+          }
+        }
+      }
+    },
+    "/jobs/{jobId}/assets" : {
+      "get" : {
+        "tags" : [ "Asset" ],
+        "summary" : "List all Assets within a Job",
+        "description" : "List all Assets which belongs to a specific job",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "jobId",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "The requested resource",
+            "schema" : {
+              "$ref" : "#/definitions/asset"
+            }
+          },
+          "404" : {
+            "description" : "Resource not found"
+          },
+          "500" : {
+            "description" : "Internal server error"
+          }
+        }
+      }
+    },
+    "/jobs/{jobId}/assets/{assetId}" : {
+      "get" : {
+        "tags" : [ "Asset" ],
+        "summary" : "Get an Asset",
+        "description" : "Get an Asset which belongs to a specific job",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "jobId",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "assetId",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "The requested resource",
+            "schema" : {
+              "$ref" : "#/definitions/asset"
+            }
+          },
+          "404" : {
+            "description" : "Resource not found"
+          },
+          "500" : {
+            "description" : "Internal server error"
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "Asset" ],
+        "summary" : "Update an Asset",
+        "description" : "Update an Asset which belongs to a specific job",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "assetId",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "jobId",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "asset",
+          "required" : true,
+          "schema" : {
+            "example" : {
+              "sourceLanguage" : "sk",
+              "encoding" : "utf8",
+              "jobId" : 1
+            }
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "The requested resource",
+            "schema" : {
+              "$ref" : "#/definitions/asset"
+            }
+          },
+          "404" : {
+            "description" : "Resource not found"
+          },
+          "500" : {
+            "description" : "Internal server error"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "Asset" ],
+        "summary" : "Delete an Asset",
+        "description" : "Delete an Asset which belongs to a specific job",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "jobId",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "assetId",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "The requested resource",
+            "schema" : {
+              "$ref" : "#/definitions/asset"
+            }
+          },
+          "404" : {
+            "description" : "Resource not found"
+          },
+          "500" : {
+            "description" : "Internal server error"
+          }
+        }
+      }
+    },
+    "/assets/{assetId}/tasks" : {
+      "get" : {
+        "tags" : [ "Task" ],
+        "summary" : "List all Task",
+        "description" : "Lists all Task which belong to a specific job",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "assetId",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "The requested resource",
+            "schema" : {
+              "$ref" : "#/definitions/task"
+            }
+          },
+          "404" : {
+            "description" : "Resource not found"
+          },
+          "500" : {
+            "description" : "Internal server error"
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "Task" ],
+        "summary" : "Create a Task",
+        "description" : "Creates a Task which will belong to a specific job.",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "assetId",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "task",
+          "required" : true,
+          "schema" : {
+            "example" : {
+              "jobId" : 1,
+              "assetId" : 1,
+              "type" : "translation",
+              "targetLanguage" : "cz",
+              "assignedTo" : "symfonie.com/43920149320"
+            }
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "The requested resource",
+            "schema" : {
+              "$ref" : "#/definitions/task"
+            }
+          },
+          "404" : {
+            "description" : "Resource not found"
+          },
+          "500" : {
+            "description" : "Internal server error"
+          }
+        }
+      }
+    },
+    "/assets/{assetId}/tasks/{taskId}" : {
+      "get" : {
+        "tags" : [ "Task" ],
+        "summary" : "Get a Task",
+        "description" : "Gets a Task which belongs to a specific job",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "assetId",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "taskId",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "The requested resource",
+            "schema" : {
+              "$ref" : "#/definitions/task"
+            }
+          },
+          "404" : {
+            "description" : "Resource not found"
+          },
+          "500" : {
+            "description" : "Internal server error"
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "Task" ],
+        "summary" : "Update a Task",
+        "description" : "Updates a Task which belongs to a specific job",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "assetId",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "taskId",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "task",
+          "required" : true,
+          "schema" : {
+            "example" : {
+              "jobId" : 1,
+              "assetId" : 1,
+              "progress" : "paused",
+              "type" : "translation",
+              "targetLanguage" : "cz",
+              "assignedTo" : "symfonie.com/43920149320"
+            }
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "The requested resource",
+            "schema" : {
+              "$ref" : "#/definitions/task"
+            }
+          },
+          "404" : {
+            "description" : "Resource not found"
+          },
+          "500" : {
+            "description" : "Internal server error"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "Task" ],
+        "summary" : "Delete a Task",
+        "description" : "Deletes a Task which belongs to a specific job",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "assetId",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "taskId",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "The requested resource",
+            "schema" : {
+              "$ref" : "#/definitions/task"
+            }
+          },
+          "404" : {
+            "description" : "Resource not found"
+          },
+          "500" : {
+            "description" : "Internal server error"
+          }
+        }
+      }
+    },
+    "/assets/{assetId}/tasks/{taskId}/uploaddeliverable" : {
+      "post" : {
+        "tags" : [ "Task" ],
+        "summary" : "Upload deliverable file",
+        "description" : "Upload deliverable file",
+        "consumes" : [ "multipart/form-data" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "assetId",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "taskId",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "deliverable",
+          "in" : "formData",
+          "description" : "The deliverable file",
+          "required" : true,
+          "type" : "file"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "The requested resource",
+            "schema" : {
+              "$ref" : "#/definitions/task"
+            }
+          },
+          "404" : {
+            "description" : "Resource not found"
+          },
+          "500" : {
+            "description" : "Internal server error"
+          }
+        }
+      }
+    },
+    "/assets/{assetId}/tasks/{taskId}/downloaddeliverable" : {
+      "get" : {
+        "tags" : [ "Task" ],
+        "summary" : "Download deliverable file",
+        "description" : "Download deliverable file",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "assetId",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "taskId",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "The deliverable file"
+          },
+          "404" : {
+            "description" : "Resource not found"
+          },
+          "500" : {
+            "description" : "Internal server error"
+          }
+        }
+      }
+    },
+    "/assets" : {
+      "get" : {
+        "tags" : [ "Asset" ],
+        "summary" : "List all Assets",
+        "description" : "List all Assets",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "The requested resource",
+            "schema" : {
+              "$ref" : "#/definitions/asset"
+            }
+          },
+          "404" : {
+            "description" : "Resource not found"
+          },
+          "500" : {
+            "description" : "Internal server error"
+          }
+        }
+      }
+    },
+    "/webhooks" : {
+      "get" : {
+        "tags" : [ "Webhook" ],
+        "summary" : "List all Webhooks",
+        "description" : "List all Webhooks",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "The requested resource",
+            "schema" : {
+              "$ref" : "#/definitions/webhook"
+            }
+          },
+          "404" : {
+            "description" : "Resource not found"
+          },
+          "500" : {
+            "description" : "Internal server error"
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "Webhook" ],
+        "summary" : "Create a Webhook",
+        "description" : "Create a Webhook",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "webhook",
+          "required" : true,
+          "schema" : {
+            "example" : {
+              "name" : "name of the webhook",
+              "description" : "more details about this webhook",
+              "url" : "url that will be visited by TAPICC server",
+              "eventType" : "taskCreated"
+            }
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "The requested resource",
+            "schema" : {
+              "$ref" : "#/definitions/webhook"
+            }
+          },
+          "404" : {
+            "description" : "Resource not found"
+          },
+          "500" : {
+            "description" : "Internal server error"
+          }
+        }
+      }
+    },
+    "/tasks" : {
+      "get" : {
+        "tags" : [ "Task" ],
+        "summary" : "List all Tasks",
+        "description" : "List all Tasks",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "The requested resource",
+            "schema" : {
+              "$ref" : "#/definitions/task"
+            }
+          },
+          "404" : {
+            "description" : "Resource not found"
+          },
+          "500" : {
+            "description" : "Internal server error"
+          }
+        }
+      }
+    },
+    "/webhooks/{webhookId}" : {
+      "get" : {
+        "tags" : [ "Webhook" ],
+        "summary" : "Get a Webhook",
+        "description" : "Get a Webhook",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "webhookId",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "The requested resource",
+            "schema" : {
+              "$ref" : "#/definitions/webhook"
+            }
+          },
+          "404" : {
+            "description" : "Resource not found"
+          },
+          "500" : {
+            "description" : "Internal server error"
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "Webhook" ],
+        "summary" : "Update a Webhook",
+        "description" : "Update a Webhook",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "webhookId",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "webhook",
+          "required" : true,
+          "schema" : {
+            "example" : {
+              "name" : "name of the webhook",
+              "description" : "more details about this webhook",
+              "url" : "url that will be visited by TAPICC server",
+              "eventType" : "taskCreated"
+            }
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "The requested resource",
+            "schema" : {
+              "$ref" : "#/definitions/webhook"
+            }
+          },
+          "404" : {
+            "description" : "Resource not found"
+          },
+          "500" : {
+            "description" : "Internal server error"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "Webhook" ],
+        "summary" : "Delete a Webhook",
+        "description" : "Delete a Webhook",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "webhookId",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "The requested resource",
+            "schema" : {
+              "$ref" : "#/definitions/webhook"
+            }
+          },
+          "404" : {
+            "description" : "Resource not found"
+          },
+          "500" : {
+            "description" : "Internal server error"
+          }
+        }
+      }
+    }
+  },
+  "definitions" : {
+    "job" : {
+      "required" : [ "submitter" ],
+      "properties" : {
+        "id" : {
+          "type" : "integer",
+          "format" : "int32",
+          "description" : "(auto-generated)"
+        },
+        "name" : {
+          "type" : "string",
+          "format" : "string",
+          "description" : "name of a Job"
+        },
+        "description" : {
+          "type" : "string",
+          "format" : "string"
+        },
+        "submitDate" : {
+          "type" : "string",
+          "format" : "date-time",
+          "description" : "a date when the Job was submit (auto-generated)"
+        },
+        "dueDate" : {
+          "type" : "string",
+          "format" : "date-time",
+          "description" : "a date with a deadline"
+        },
+        "closedDate" : {
+          "type" : "string",
+          "format" : "date-time",
+          "description" : "a date when the Job was closed"
+        },
+        "submitter" : {
+          "type" : "string",
+          "format" : "string",
+          "example" : "symfonie.com/43920149320",
+          "description" : "\"server name / id\" of the user who did submit the Job"
+        },
+        "assets" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/asset"
+          }
+        },
+        "externalId" : {
+          "type" : "string",
+          "format" : "string",
+          "description" : "external project id, as is defined on the external system"
+        },
+        "createdAt" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "updatedAt" : {
+          "type" : "string",
+          "format" : "date-time"
+        }
+      },
+      "example" : {
+        "submitter" : "symfonie.com/43920149320",
+        "createdAt" : "2000-01-23T04:56:07.000+00:00",
+        "assets" : [ {
+          "jobId" : 1,
+          "createdAt" : "2000-01-23T04:56:07.000+00:00",
+          "fileDescriptor" : "fileDescriptor",
+          "isReference" : true,
+          "id" : 6,
+          "encoding" : "encoding",
+          "sourceLanguage" : "sourceLanguage",
+          "tasks" : [ {
+            "jobId" : 5,
+            "createdAt" : "2000-01-23T04:56:07.000+00:00",
+            "targetLanguage" : "targetLanguage",
+            "fileDescriptor" : "fileDescriptor",
+            "assetId" : 2,
+            "progress" : "pending",
+            "id" : 5,
+            "type" : "translation",
+            "assignedTo" : "symfonie.com/43920149320",
+            "fileOriginalName" : "fileOriginalName",
+            "updatedAt" : "2000-01-23T04:56:07.000+00:00"
+          }, {
+            "jobId" : 5,
+            "createdAt" : "2000-01-23T04:56:07.000+00:00",
+            "targetLanguage" : "targetLanguage",
+            "fileDescriptor" : "fileDescriptor",
+            "assetId" : 2,
+            "progress" : "pending",
+            "id" : 5,
+            "type" : "translation",
+            "assignedTo" : "symfonie.com/43920149320",
+            "fileOriginalName" : "fileOriginalName",
+            "updatedAt" : "2000-01-23T04:56:07.000+00:00"
+          } ],
+          "fileOriginalName" : "fileOriginalName",
+          "updatedAt" : "2000-01-23T04:56:07.000+00:00"
+        }, {
+          "jobId" : 1,
+          "createdAt" : "2000-01-23T04:56:07.000+00:00",
+          "fileDescriptor" : "fileDescriptor",
+          "isReference" : true,
+          "id" : 6,
+          "encoding" : "encoding",
+          "sourceLanguage" : "sourceLanguage",
+          "tasks" : [ {
+            "jobId" : 5,
+            "createdAt" : "2000-01-23T04:56:07.000+00:00",
+            "targetLanguage" : "targetLanguage",
+            "fileDescriptor" : "fileDescriptor",
+            "assetId" : 2,
+            "progress" : "pending",
+            "id" : 5,
+            "type" : "translation",
+            "assignedTo" : "symfonie.com/43920149320",
+            "fileOriginalName" : "fileOriginalName",
+            "updatedAt" : "2000-01-23T04:56:07.000+00:00"
+          }, {
+            "jobId" : 5,
+            "createdAt" : "2000-01-23T04:56:07.000+00:00",
+            "targetLanguage" : "targetLanguage",
+            "fileDescriptor" : "fileDescriptor",
+            "assetId" : 2,
+            "progress" : "pending",
+            "id" : 5,
+            "type" : "translation",
+            "assignedTo" : "symfonie.com/43920149320",
+            "fileOriginalName" : "fileOriginalName",
+            "updatedAt" : "2000-01-23T04:56:07.000+00:00"
+          } ],
+          "fileOriginalName" : "fileOriginalName",
+          "updatedAt" : "2000-01-23T04:56:07.000+00:00"
+        } ],
+        "closedDate" : "2000-01-23T04:56:07.000+00:00",
+        "dueDate" : "2000-01-23T04:56:07.000+00:00",
+        "name" : "name",
+        "submitDate" : "2000-01-23T04:56:07.000+00:00",
+        "description" : "description",
+        "externalId" : "externalId",
+        "id" : 0,
+        "updatedAt" : "2000-01-23T04:56:07.000+00:00"
+      }
+    },
+    "asset" : {
+      "properties" : {
+        "id" : {
+          "type" : "integer",
+          "format" : "int32",
+          "description" : "(auto-generated)"
+        },
+        "fileDescriptor" : {
+          "type" : "string",
+          "format" : "string",
+          "description" : "unique name of the file. (auto-generated)"
+        },
+        "fileOriginalName" : {
+          "type" : "string",
+          "format" : "string",
+          "description" : "original name of the file as uploaded. (auto-filled)"
+        },
+        "isReference" : {
+          "type" : "boolean",
+          "description" : "if is set to true, then the Asset is not suppossed to be actionable."
+        },
+        "sourceLanguage" : {
+          "type" : "string",
+          "format" : "string",
+          "description" : "language code of the source"
+        },
+        "encoding" : {
+          "type" : "string",
+          "format" : "string",
+          "description" : "encoding code"
+        },
+        "jobId" : {
+          "type" : "integer"
+        },
+        "tasks" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/task"
+          }
+        },
+        "createdAt" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "updatedAt" : {
+          "type" : "string",
+          "format" : "date-time"
+        }
+      },
+      "example" : {
+        "jobId" : 1,
+        "createdAt" : "2000-01-23T04:56:07.000+00:00",
+        "fileDescriptor" : "fileDescriptor",
+        "isReference" : true,
+        "id" : 6,
+        "encoding" : "encoding",
+        "sourceLanguage" : "sourceLanguage",
+        "tasks" : [ {
+          "jobId" : 5,
+          "createdAt" : "2000-01-23T04:56:07.000+00:00",
+          "targetLanguage" : "targetLanguage",
+          "fileDescriptor" : "fileDescriptor",
+          "assetId" : 2,
+          "progress" : "pending",
+          "id" : 5,
+          "type" : "translation",
+          "assignedTo" : "symfonie.com/43920149320",
+          "fileOriginalName" : "fileOriginalName",
+          "updatedAt" : "2000-01-23T04:56:07.000+00:00"
+        }, {
+          "jobId" : 5,
+          "createdAt" : "2000-01-23T04:56:07.000+00:00",
+          "targetLanguage" : "targetLanguage",
+          "fileDescriptor" : "fileDescriptor",
+          "assetId" : 2,
+          "progress" : "pending",
+          "id" : 5,
+          "type" : "translation",
+          "assignedTo" : "symfonie.com/43920149320",
+          "fileOriginalName" : "fileOriginalName",
+          "updatedAt" : "2000-01-23T04:56:07.000+00:00"
+        } ],
+        "fileOriginalName" : "fileOriginalName",
+        "updatedAt" : "2000-01-23T04:56:07.000+00:00"
+      }
+    },
+    "task" : {
+      "required" : [ "type" ],
+      "properties" : {
+        "id" : {
+          "type" : "integer",
+          "format" : "int32",
+          "description" : "(auto-generated)"
+        },
+        "type" : {
+          "type" : "string",
+          "format" : "string",
+          "enum" : [ "translation", "machine translation", "modification", "proof" ]
+        },
+        "targetLanguage" : {
+          "type" : "string",
+          "format" : "string",
+          "description" : "language code of the target"
+        },
+        "progress" : {
+          "type" : "string",
+          "format" : "string",
+          "description" : "pending - the Task has been created, and it's pending to be reviewed and assigned to someone.\n\nin progress - the Task has been assigned to someone and is being worked on.\n\npaused - the Task went from in progress, to paused, because something is blocking the Task, or the assignee has other priorities.\n\ncanceled - someone did cancel this Task.\n\nfinished - the work on this Task is done and deliverableLocation is filled with a path to deliverable.",
+          "enum" : [ "pending", "in progress", "paused", "canceled", "finished" ],
+          "default" : "pending"
+        },
+        "assignedTo" : {
+          "type" : "string",
+          "format" : "string",
+          "example" : "symfonie.com/43920149320",
+          "description" : "\"server name / id\" of the user who it is assigned to"
+        },
+        "fileDescriptor" : {
+          "type" : "string",
+          "format" : "string",
+          "description" : "unique name of the file. (auto-generated)"
+        },
+        "fileOriginalName" : {
+          "type" : "string",
+          "format" : "string",
+          "description" : "original name of the file as uploaded. (auto-filled)"
+        },
+        "jobId" : {
+          "type" : "integer"
+        },
+        "assetId" : {
+          "type" : "integer"
+        },
+        "createdAt" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "updatedAt" : {
+          "type" : "string",
+          "format" : "date-time"
+        }
+      },
+      "example" : {
+        "jobId" : 5,
+        "createdAt" : "2000-01-23T04:56:07.000+00:00",
+        "targetLanguage" : "targetLanguage",
+        "fileDescriptor" : "fileDescriptor",
+        "assetId" : 2,
+        "progress" : "pending",
+        "id" : 5,
+        "type" : "translation",
+        "assignedTo" : "symfonie.com/43920149320",
+        "fileOriginalName" : "fileOriginalName",
+        "updatedAt" : "2000-01-23T04:56:07.000+00:00"
+      }
+    },
+    "webhook" : {
+      "required" : [ "eventType", "url" ],
+      "properties" : {
+        "id" : {
+          "type" : "integer",
+          "format" : "int32",
+          "description" : "(auto-generated)"
+        },
+        "name" : {
+          "type" : "string",
+          "format" : "string",
+          "description" : "name of the Webhook"
+        },
+        "description" : {
+          "type" : "string",
+          "format" : "string"
+        },
+        "url" : {
+          "type" : "string",
+          "format" : "string",
+          "description" : "url which the server will make a request to when an event occurs"
+        },
+        "eventType" : {
+          "type" : "string",
+          "format" : "string",
+          "description" : "type of event - if this event occurs, then the \"url\" will be requested by the TAPICC server",
+          "enum" : [ "taskCreated", "taskUpdated", "taskDeleted", "jobCreated", "jobUpdated", "jobDeleted", "assetCreated", "assetUpdated", "assetDeleted" ]
+        },
+        "createdAt" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "updatedAt" : {
+          "type" : "string",
+          "format" : "date-time"
+        }
+      },
+      "example" : {
+        "createdAt" : "2000-01-23T04:56:07.000+00:00",
+        "name" : "name",
+        "description" : "description",
+        "id" : 0,
+        "eventType" : "taskCreated",
+        "url" : "url",
+        "updatedAt" : "2000-01-23T04:56:07.000+00:00"
+      }
+    }
+  }
+}
