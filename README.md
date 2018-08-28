@@ -4,9 +4,8 @@
 
 # Note
 this is a work in progress, some things needs to be done first so we can call this production ready.
-- [ ] authentication and user sessions
-- [ ] user profile must be defined and implemented
-- [ ] manually tested
+- [ ] swagger API definition version 1.0.0
+- [ ] system accounts and authentication
 - [ ] automated tests written and implemented
 
 # Roadmap
@@ -32,10 +31,15 @@ install dependencies
 # Seeing the swagger documentation
 When you are running the server, you can navigate to http://localhost:1337/docs
 
-# Generating swagger file
+# Generating swagger file (deprecated)
 ```yarn run generateSwagger```
 
 creates or overwrites *swagger.json*
+
+We don't use the generated swagger file anymore.
+The swagger definition is [hosted on SwaggerHub](https://app.swaggerhub.com/apis/Alino/tapicc-api), and the changes are being synchronised to this github repo [_assets/swaggerhub_](https://github.com/GALAglobal/TAPICC-API-implementation/tree/master/assets/swaggerhub) folder.
+
+
 
 # Testing
 ```yarn test```
