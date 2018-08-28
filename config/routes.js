@@ -68,16 +68,6 @@ module.exports.routes = {
     }
   },
 
-  'POST /job/:id/submit':
-  {
-    controller: 'JobController',
-    action: 'create',
-    swagger: {
-      summary: 'Submit a Job',
-      description: 'Submit a Job, optionally with assets and tasks'
-    }
-  },
-
   'DELETE /job/:parentid/asset/:id': {
     controller: 'AssetController',
     action: 'destroy',
@@ -150,17 +140,6 @@ module.exports.routes = {
           }
         }
       }
-    }
-  },
-  'POST /job/:parentid/asset': {
-    controller: 'AssetController',
-    action: 'create',
-    swagger: {
-      summary: 'Create an Assets',
-      description: 'Create an Assets which will belong to a specific job',
-      tags: [
-        'Asset'
-      ]
     }
   },
 
