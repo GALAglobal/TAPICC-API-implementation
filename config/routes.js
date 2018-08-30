@@ -22,6 +22,11 @@
 
 module.exports.routes = {
 
+  'GET /': {
+    controller: 'IndexController',
+    action: 'index'
+  },
+
   // job
   'GET /jobs': {
     controller: 'JobController',
