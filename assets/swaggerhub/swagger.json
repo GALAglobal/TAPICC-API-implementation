@@ -874,20 +874,10 @@
           "type" : "string",
           "format" : "string"
         },
-        "submitDate" : {
-          "type" : "string",
-          "format" : "date-time",
-          "description" : "a date when the Job was submit (auto-generated)"
-        },
-        "dueDate" : {
+        "dueAt" : {
           "type" : "string",
           "format" : "date-time",
           "description" : "a date with a deadline"
-        },
-        "closedDate" : {
-          "type" : "string",
-          "format" : "date-time",
-          "description" : "a date when the Job was closed"
         },
         "submitter" : {
           "type" : "string",
@@ -895,16 +885,21 @@
           "example" : "symfonie.com/43920149320",
           "description" : "\"server name / id\" of the user who did submit the Job"
         },
+        "externalId" : {
+          "type" : "string",
+          "format" : "string",
+          "description" : "external project id, as is defined on the external system"
+        },
         "assets" : {
           "type" : "array",
           "items" : {
             "$ref" : "#/definitions/asset"
           }
         },
-        "externalId" : {
+        "closedAt" : {
           "type" : "string",
-          "format" : "string",
-          "description" : "external project id, as is defined on the external system"
+          "format" : "date-time",
+          "description" : "a date when the Job was closed"
         },
         "createdAt" : {
           "type" : "string",
@@ -916,6 +911,7 @@
         }
       },
       "example" : {
+        "dueAt" : "2000-01-23T04:56:07.000+00:00",
         "submitter" : "symfonie.com/43920149320",
         "createdAt" : "2000-01-23T04:56:07.000+00:00",
         "assets" : [ {
@@ -989,13 +985,11 @@
           "fileOriginalName" : "fileOriginalName",
           "updatedAt" : "2000-01-23T04:56:07.000+00:00"
         } ],
-        "closedDate" : "2000-01-23T04:56:07.000+00:00",
-        "dueDate" : "2000-01-23T04:56:07.000+00:00",
         "name" : "name",
-        "submitDate" : "2000-01-23T04:56:07.000+00:00",
         "description" : "description",
         "externalId" : "externalId",
         "id" : 0,
+        "closedAt" : "2000-01-23T04:56:07.000+00:00",
         "updatedAt" : "2000-01-23T04:56:07.000+00:00"
       }
     },
