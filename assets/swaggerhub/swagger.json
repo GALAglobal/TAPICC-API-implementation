@@ -22,6 +22,9 @@
     "name" : "Webhook"
   } ],
   "schemes" : [ "http" ],
+  "security" : [ {
+    "bearerAuth" : [ ]
+  } ],
   "paths" : {
     "/jobs" : {
       "get" : {
@@ -844,6 +847,13 @@
           }
         }
       }
+    }
+  },
+  "securityDefinitions" : {
+    "bearerAuth" : {
+      "type" : "apiKey",
+      "name" : "Authorization",
+      "in" : "header"
     }
   },
   "definitions" : {
