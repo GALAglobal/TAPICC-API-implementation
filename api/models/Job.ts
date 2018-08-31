@@ -25,19 +25,14 @@ module.exports = {
       type: 'string'
     },
 
-    submitDate: {
+    dueAt: {
       type: 'datetime',
-      description: 'a date when the Job was submit (auto-generated)'
+      description: 'a date-time with a deadline'
     },
 
-    dueDate: {
+    closedAt: {
       type: 'datetime',
-      description: 'a date with a deadline'
-    },
-
-    closedDate: {
-      type: 'datetime',
-      description: 'a date when the Job was closed'
+      description: 'a date-time when the Job was closed'
     },
 
     submitter: {
