@@ -16,5 +16,5 @@ mySailsApp.lift({
   console.time('generateSwagger');
   fs.writeFileSync('swagger.json', JSON.stringify(sails.hooks.swagger.doc, null, 2));
   console.timeEnd('generateSwagger');
-  process.exit(0);
+  sails.lower();
 })
