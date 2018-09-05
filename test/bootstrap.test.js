@@ -1,4 +1,5 @@
 var sails = require('sails');
+var constants = require('../constants');
 
 before(function(done) {
 

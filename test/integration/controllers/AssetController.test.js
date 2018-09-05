@@ -1,6 +1,8 @@
 var request = require('supertest');
 var expect = require('expect');
 var _ = require('lodash');
+var constants = require('../../../constants');
+var createLocalHostAccount = require('../../../functions').createLocalHostAccount;
 
 describe('AssetController', function () {
 
@@ -12,7 +14,7 @@ describe('AssetController', function () {
         submitter: 'symfonie.com/123'
       }).exec((err, res) => {
         if (err) console.error(err);
-        done();
+        createLocalHostAccount(done);
       });
 
       sails.once('hook:orm:reloaded', cb);
@@ -22,6 +24,7 @@ describe('AssetController', function () {
     it('should handle file upload and asset creation', function (done) {
       request(sails.hooks.http.app)
         .post('/jobs/1/assets/uploadfile')
+        .set('Authorization', 'Bearer ' + constants.ROOT_USER_API_KEY)
         .field('sourceLanguage', 'en')
         .field('encoding', 'utf8')
         .attach('asset', 'test/fixtures/testAssetFile.txt')

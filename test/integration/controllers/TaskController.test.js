@@ -1,6 +1,8 @@
 var request = require('supertest');
 var expect = require('expect');
 var _ = require('lodash');
+var constants = require('../../../constants');
+var createLocalHostAccount = require('../../../functions').createLocalHostAccount;
 
 describe('TaskController', function () {
   const fixtures = {
@@ -27,7 +29,7 @@ describe('TaskController', function () {
       }).then(() => {
         return Task.create(fixtures.tasks[0])
       }).then(() => {
-        done()
+        createLocalHostAccount(done);
       });
 
       sails.once('hook:orm:reloaded', cb);
@@ -39,6 +41,7 @@ describe('TaskController', function () {
 
       request(sails.hooks.http.app)
         .post('/assets/1/tasks/1/uploaddeliverable')
+        .set('Authorization', 'Bearer ' + constants.ROOT_USER_API_KEY)
         .attach('deliverable', 'test/fixtures/testDeliverableFile.txt')
         .expect(200)
         .then((response) => {
