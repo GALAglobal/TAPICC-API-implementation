@@ -19,6 +19,8 @@
  */
 
 require('ts-node/register');
+var constants = require('./constants');
+
 
 
 // Ensure we're in the project directory, so cwd-relative paths work as expected
@@ -60,3 +62,17 @@ try {
 
 // Start server
 sails.lift(rc('sails'));
+
+// create default localhost account.
+sails.on('ready', () => {
+  const defaultLocalHostAcc = {
+    hostname: constants.ROOT_USER_HOSTNAME,
+    api_key: constants.ROOT_USER_API_KEY
+  }
+  Account.findOrCreate({ hostname: defaultLocalHostAcc.hostname }, defaultLocalHostAcc)
+  .exec((err, recordFound, newRecord) => {
+    if (err) console.error(err);
+    if (recordFound) console.log('default localhost account already exist.');
+    if (newRecord) console.log('created a default localhost account.');
+  });
+});

@@ -27,6 +27,26 @@ module.exports.routes = {
     action: 'index'
   },
 
+  'GET /accounts': {
+    controller: 'AccountController',
+    action: 'find'
+  },
+
+  'POST /accounts': {
+    controller: 'AccountController',
+    action: 'create'
+  },
+
+  'PUT /accounts/:id': {
+    controller: 'AccountController',
+    action: 'update'
+  },
+
+  'DELETE /accounts/:id': {
+    controller: 'AccountController',
+    action: 'destroy'
+  },
+
   // job
   'GET /jobs': {
     controller: 'JobController',
