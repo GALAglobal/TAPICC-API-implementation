@@ -12,13 +12,11 @@ module.exports = {
       type: 'integer',
       autoIncrement: true,
       unique: true,
-      primaryKey: true,
-      description: '(auto-generated)'
+      primaryKey: true
     },
 
     name: {
-      type: 'string',
-      description: 'name of the Webhook'
+      type: 'string'
     },
 
     description: {
@@ -27,7 +25,6 @@ module.exports = {
 
     url: {
       type: 'string',
-      description: 'url which the server will make a request to when an event occurs',
       required: true
     },
 
@@ -44,16 +41,9 @@ module.exports = {
         'assetUpdated',
         'assetDeleted'
       ],
-      description: 'type of event - if this event occurs, then the "url" will be requested by the TAPICC server',
       required: true
     }
-  },
-
-  // custom validation functions
-  types: {
-    // This is a workaround for having description in the attributes.
-    // Otherwise there would be an error.
-    description: () => true
   }
+  
 };
 

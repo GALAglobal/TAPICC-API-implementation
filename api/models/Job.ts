@@ -12,13 +12,11 @@ module.exports = {
       type: 'integer',
       autoIncrement: true,
       unique: true,
-      primaryKey: true,
-      description: '(auto-generated)'
+      primaryKey: true
     },
 
     name: {
-      type: 'string',
-      description: 'name of a Job'
+      type: 'string'
     },
 
     description: {
@@ -26,20 +24,16 @@ module.exports = {
     },
 
     dueAt: {
-      type: 'datetime',
-      description: 'a date-time with a deadline'
+      type: 'datetime'
     },
 
     closedAt: {
-      type: 'datetime',
-      description: 'a date-time when the Job was closed'
+      type: 'datetime'
     },
 
     submitter: {
       type: 'string',
-      description: '"server name / id" of the user who did submit the Job',
-      required: true,
-      example: 'symfonie.com/43920149320'
+      required: true
     },
 
     assets: {
@@ -48,18 +42,10 @@ module.exports = {
     },
 
     externalId: {
-      type: 'string',
-      description: 'external project id, as is defined on the external system'
+      type: 'string'
     }
 
   },
 
-  // custom validation functions
-  types: {
-    // This is a workaround for having description in the attributes.
-    // Otherwise there would be an error.
-    description: () => true,
-    example: () => true
-  }
 };
 

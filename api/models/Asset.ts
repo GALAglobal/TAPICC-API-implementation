@@ -12,33 +12,27 @@ module.exports = {
       type: 'integer',
       autoIncrement: true,
       unique: true,
-      primaryKey: true,
-      description: '(auto-generated)'
+      primaryKey: true
     },
 
     fileDescriptor: {
-      type: 'string',
-      description: 'unique name of the file. (auto-generated)'
+      type: 'string'
     },
 
     fileOriginalName: {
-      type: 'string',
-      description: 'original name of the file as uploaded. (auto-filled)'
+      type: 'string'
     },
 
     isReference: {
-      type: 'boolean',
-      description: 'if is set to true, then the Asset is not suppossed to be actionable.'
+      type: 'boolean'
     },
 
     sourceLanguage: {
-      type: 'string',
-      description: 'language code of the source'
+      type: 'string'
     },
 
     encoding: {
-      type: 'string',
-      description: 'encoding code'
+      type: 'string'
     },
 
     jobId: {
