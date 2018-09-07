@@ -421,15 +421,10 @@
       "post" : {
         "tags" : [ "Task" ],
         "summary" : "Create a Task",
-        "description" : "Creates a Task which will belong to a specific job.",
+        "description" : "Creates a Task which will belong to a specific Job or Asset.",
         "consumes" : [ "application/json" ],
         "produces" : [ "application/json" ],
         "parameters" : [ {
-          "name" : "assetId",
-          "in" : "path",
-          "required" : true,
-          "type" : "string"
-        }, {
           "in" : "body",
           "name" : "task",
           "required" : true,
@@ -463,15 +458,10 @@
       "get" : {
         "tags" : [ "Task" ],
         "summary" : "Get a Task",
-        "description" : "Gets a Task which belongs to a specific job",
+        "description" : "Gets a Task by id",
         "consumes" : [ "application/json" ],
         "produces" : [ "application/json" ],
         "parameters" : [ {
-          "name" : "assetId",
-          "in" : "path",
-          "required" : true,
-          "type" : "string"
-        }, {
           "name" : "taskId",
           "in" : "path",
           "required" : true,
@@ -495,15 +485,10 @@
       "put" : {
         "tags" : [ "Task" ],
         "summary" : "Update a Task",
-        "description" : "Updates a Task which belongs to a specific job",
+        "description" : "Updates a Task by id",
         "consumes" : [ "application/json" ],
         "produces" : [ "application/json" ],
         "parameters" : [ {
-          "name" : "assetId",
-          "in" : "path",
-          "required" : true,
-          "type" : "string"
-        }, {
           "name" : "taskId",
           "in" : "path",
           "required" : true,
@@ -541,15 +526,10 @@
       "delete" : {
         "tags" : [ "Task" ],
         "summary" : "Delete a Task",
-        "description" : "Deletes a Task which belongs to a specific job",
+        "description" : "Deletes a Task by id",
         "consumes" : [ "application/json" ],
         "produces" : [ "application/json" ],
         "parameters" : [ {
-          "name" : "assetId",
-          "in" : "path",
-          "required" : true,
-          "type" : "string"
-        }, {
           "name" : "taskId",
           "in" : "path",
           "required" : true,
@@ -579,11 +559,6 @@
         "consumes" : [ "multipart/form-data" ],
         "produces" : [ "application/json" ],
         "parameters" : [ {
-          "name" : "assetId",
-          "in" : "path",
-          "required" : true,
-          "type" : "string"
-        }, {
           "name" : "taskId",
           "in" : "path",
           "required" : true,
@@ -619,11 +594,6 @@
         "consumes" : [ "application/json" ],
         "produces" : [ "application/json" ],
         "parameters" : [ {
-          "name" : "assetId",
-          "in" : "path",
-          "required" : true,
-          "type" : "string"
-        }, {
           "name" : "taskId",
           "in" : "path",
           "required" : true,
