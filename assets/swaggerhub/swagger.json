@@ -395,19 +395,14 @@
         }
       }
     },
-    "/assets/{assetId}/tasks" : {
+    "/tasks" : {
       "get" : {
         "tags" : [ "Task" ],
-        "summary" : "List all Task",
-        "description" : "Lists all Task which belong to a specific job",
+        "summary" : "List all Tasks",
+        "description" : "List all Tasks",
         "consumes" : [ "application/json" ],
         "produces" : [ "application/json" ],
-        "parameters" : [ {
-          "name" : "assetId",
-          "in" : "path",
-          "required" : true,
-          "type" : "string"
-        } ],
+        "parameters" : [ ],
         "responses" : {
           "200" : {
             "description" : "The requested resource",
@@ -464,7 +459,7 @@
         }
       }
     },
-    "/assets/{assetId}/tasks/{taskId}" : {
+    "/tasks/{taskId}" : {
       "get" : {
         "tags" : [ "Task" ],
         "summary" : "Get a Task",
@@ -576,7 +571,7 @@
         }
       }
     },
-    "/assets/{assetId}/tasks/{taskId}/uploaddeliverable" : {
+    "/tasks/{taskId}/uploaddeliverable" : {
       "post" : {
         "tags" : [ "Task" ],
         "summary" : "Upload deliverable file",
@@ -616,7 +611,7 @@
         }
       }
     },
-    "/assets/{assetId}/tasks/{taskId}/downloaddeliverable" : {
+    "/tasks/{taskId}/downloaddeliverable" : {
       "get" : {
         "tags" : [ "Task" ],
         "summary" : "Download deliverable file",
@@ -718,30 +713,6 @@
             "description" : "The requested resource",
             "schema" : {
               "$ref" : "#/definitions/webhook"
-            }
-          },
-          "404" : {
-            "description" : "Resource not found"
-          },
-          "500" : {
-            "description" : "Internal server error"
-          }
-        }
-      }
-    },
-    "/tasks" : {
-      "get" : {
-        "tags" : [ "Task" ],
-        "summary" : "List all Tasks",
-        "description" : "List all Tasks",
-        "consumes" : [ "application/json" ],
-        "produces" : [ "application/json" ],
-        "parameters" : [ ],
-        "responses" : {
-          "200" : {
-            "description" : "The requested resource",
-            "schema" : {
-              "$ref" : "#/definitions/task"
             }
           },
           "404" : {
@@ -1080,7 +1051,7 @@
       }
     },
     "task" : {
-      "required" : [ "type" ],
+      "required" : [ "jobId", "type" ],
       "properties" : {
         "id" : {
           "type" : "integer",
