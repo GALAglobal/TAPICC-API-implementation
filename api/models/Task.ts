@@ -59,7 +59,8 @@ finished - the work on this Task is done and deliverableLocation is filled with 
     },
 
     jobId: {
-      model: 'job'
+      model: 'job',
+      required: true
     },
 
     assetId: {

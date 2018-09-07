@@ -168,62 +168,6 @@ module.exports.routes = {
     }
   },
 
-  'DELETE /assets/:parentid/tasks/:id': {
-    controller: 'TaskController',
-    action: 'destroy',
-    swagger: {
-      summary: 'Delete a Task',
-      description: 'Deletes a Task which belongs to a specific job',
-      tags: [
-        'Task'
-      ]
-    }
-  },
-  'GET /assets/:parentid/tasks/:id': {
-    controller: 'TaskController',
-    action: 'findOne',
-    swagger: {
-      summary: 'Get a Task',
-      description: 'Gets a Task which belongs to a specific job',
-      tags: [
-        'Task'
-      ]
-    }
-  },
-  'PUT /assets/:parentid/tasks/:id': {
-    controller: 'TaskController',
-    action: 'update',
-    swagger: {
-      summary: 'Update a Task',
-      description: 'Updates a Task which belongs to a specific job',
-      tags: [
-        'Task'
-      ]
-    }
-  },
-  'GET /assets/:parentid/tasks': {
-    controller: 'TaskController',
-    action: 'find',
-    swagger: {
-      summary: 'List all Task',
-      description: 'Lists all Task which belong to a specific job',
-      tags: [
-        'Task'
-      ]
-    }
-  },
-  'POST /assets/:parentid/tasks': {
-    controller: 'TaskController',
-    action: 'create',
-    swagger: {
-      summary: 'Create a Task',
-      description: `Creates a Task which will belong to a specific job.`,
-      tags: [
-        'Task'
-      ]
-    }
-  },
-
   'POST /jobs/:parentid/assets/uploadfile':
   {
     controller: 'AssetController',
@@ -284,7 +228,62 @@ module.exports.routes = {
       }
     }
   },
-    'POST /assets/:parentid/tasks/:id/uploaddeliverable': {
+
+
+    // task
+    'POST /tasks': {
+      controller: 'TaskController',
+      action: 'create',
+      swagger: {
+        summary: 'Create a Task',
+        description: `Creates a Task which will belong to a specific job.`,
+        tags: [
+          'Task'
+        ]
+      }
+    },
+    'GET /tasks': {
+      controller: 'TaskController',
+      action: 'find',
+      swagger: {
+        summary: 'List all Tasks',
+        description: 'List all Tasks'
+      }
+    },
+    'GET /tasks/:id': {
+      controller: 'TaskController',
+      action: 'findOne',
+      swagger: {
+        summary: 'Get a Task',
+        description: 'Gets a Task which belongs to a specific job',
+        tags: [
+          'Task'
+        ]
+      }
+    },
+    'PUT /tasks/:id': {
+      controller: 'TaskController',
+      action: 'update',
+      swagger: {
+        summary: 'Update a Task',
+        description: 'Updates a Task which belongs to a specific job',
+        tags: [
+          'Task'
+        ]
+      }
+    },
+    'DELETE /tasks/:id': {
+      controller: 'TaskController',
+      action: 'destroy',
+      swagger: {
+        summary: 'Delete a Task',
+        description: 'Deletes a Task which belongs to a specific job',
+        tags: [
+          'Task'
+        ]
+      }
+    },
+    'POST /tasks/:id/uploaddeliverable': {
       controller: 'TaskController',
       action: 'uploadFile',
       swagger: {
@@ -323,7 +322,7 @@ module.exports.routes = {
         }
       }
     },
-    'GET /assets/:parentid/tasks/:id/downloaddeliverable': {
+    'GET /tasks/:id/downloaddeliverable': {
       controller: 'TaskController',
       action: 'downloadFile',
       swagger: {
@@ -343,16 +342,6 @@ module.exports.routes = {
             }
           }
         }
-      }
-    },
-
-    // task
-    'GET /tasks': {
-      controller: 'TaskController',
-      action: 'find',
-      swagger: {
-        summary: 'List all Tasks',
-        description: 'List all Tasks'
       }
     },
 

@@ -17,12 +17,13 @@ describe('TaskController', function () {
     }],
     tasks: [{
       id: 1,
+      jobId: 1,
       assetId: 1,
       progress: 'pending',
       type: 'translation'
     }]
   }
-  describe('POST /assets/:parentid/tasks/:id/uploaddeliverable', function () {
+  describe('POST /tasks/:id/uploaddeliverable', function () {
     beforeEach(function (done) {
       const cb = () => Job.create(fixtures.jobs[0]).then(() => {
         return Asset.create(fixtures.assets[0])
@@ -40,7 +41,7 @@ describe('TaskController', function () {
     it('should upload the deliverable file to an existing Task', function (done) {
 
       request(sails.hooks.http.app)
-        .post('/assets/1/tasks/1/uploaddeliverable')
+        .post('/tasks/1/uploaddeliverable')
         .set('Authorization', 'Bearer ' + constants.ROOT_USER_API_KEY)
         .attach('deliverable', 'test/fixtures/testDeliverableFile.txt')
         .expect(200)
