@@ -15,7 +15,7 @@
   "tags" : [ {
     "name" : "Job"
   }, {
-    "name" : "Asset"
+    "name" : "Input"
   }, {
     "name" : "Task"
   }, {
@@ -70,7 +70,7 @@
           }
         } ],
         "responses" : {
-          "200" : {
+          "201" : {
             "description" : "The requested resource",
             "schema" : {
               "$ref" : "#/definitions/job"
@@ -166,11 +166,8 @@
           "type" : "string"
         } ],
         "responses" : {
-          "200" : {
-            "description" : "The requested resource",
-            "schema" : {
-              "$ref" : "#/definitions/job"
-            }
+          "204" : {
+            "description" : "NoContent"
           },
           "404" : {
             "description" : "Resource not found"
@@ -181,11 +178,11 @@
         }
       }
     },
-    "/jobs/{jobId}/assets/uploadfile" : {
+    "/jobs/{jobId}/inputs/uploadfile" : {
       "post" : {
-        "tags" : [ "Asset" ],
-        "summary" : "Upload an asset file and create an asset",
-        "description" : "Upload an asset file and create an asset",
+        "tags" : [ "Input" ],
+        "summary" : "Upload an input file and create an input",
+        "description" : "Upload an input file and create an input",
         "consumes" : [ "multipart/form-data" ],
         "produces" : [ "application/json" ],
         "parameters" : [ {
@@ -204,17 +201,17 @@
           "required" : false,
           "type" : "string"
         }, {
-          "name" : "asset",
+          "name" : "input",
           "in" : "formData",
-          "description" : "The Asset file",
+          "description" : "The Input file",
           "required" : true,
           "type" : "file"
         } ],
         "responses" : {
-          "200" : {
+          "201" : {
             "description" : "The requested resource",
             "schema" : {
-              "$ref" : "#/definitions/asset"
+              "$ref" : "#/definitions/input"
             }
           },
           "404" : {
@@ -226,11 +223,11 @@
         }
       }
     },
-    "/jobs/{jobId}/assets/{assetId}/downloadfile" : {
+    "/jobs/{jobId}/inputs/{inputId}/downloadfile" : {
       "get" : {
-        "tags" : [ "Asset" ],
-        "summary" : "Download an asset file",
-        "description" : "Download an asset file",
+        "tags" : [ "Input" ],
+        "summary" : "Download an input file",
+        "description" : "Download an input file",
         "consumes" : [ "application/json" ],
         "produces" : [ "application/json" ],
         "parameters" : [ {
@@ -239,14 +236,14 @@
           "required" : true,
           "type" : "string"
         }, {
-          "name" : "assetId",
+          "name" : "inputId",
           "in" : "path",
           "required" : true,
           "type" : "string"
         } ],
         "responses" : {
           "200" : {
-            "description" : "The asset file"
+            "description" : "The input file"
           },
           "404" : {
             "description" : "Resource not found"
@@ -257,11 +254,11 @@
         }
       }
     },
-    "/jobs/{jobId}/assets" : {
+    "/jobs/{jobId}/inputs" : {
       "get" : {
-        "tags" : [ "Asset" ],
-        "summary" : "List all Assets within a Job",
-        "description" : "List all Assets which belongs to a specific job",
+        "tags" : [ "Input" ],
+        "summary" : "List all Inputs within a Job",
+        "description" : "List all Inputs which belongs to a specific job",
         "consumes" : [ "application/json" ],
         "produces" : [ "application/json" ],
         "parameters" : [ {
@@ -274,7 +271,7 @@
           "200" : {
             "description" : "The requested resource",
             "schema" : {
-              "$ref" : "#/definitions/asset"
+              "$ref" : "#/definitions/input"
             }
           },
           "404" : {
@@ -286,11 +283,11 @@
         }
       }
     },
-    "/jobs/{jobId}/assets/{assetId}" : {
+    "/jobs/{jobId}/inputs/{inputId}" : {
       "get" : {
-        "tags" : [ "Asset" ],
-        "summary" : "Get an Asset",
-        "description" : "Get an Asset which belongs to a specific job",
+        "tags" : [ "Input" ],
+        "summary" : "Get an Input",
+        "description" : "Get an Input which belongs to a specific job",
         "consumes" : [ "application/json" ],
         "produces" : [ "application/json" ],
         "parameters" : [ {
@@ -299,7 +296,7 @@
           "required" : true,
           "type" : "string"
         }, {
-          "name" : "assetId",
+          "name" : "inputId",
           "in" : "path",
           "required" : true,
           "type" : "string"
@@ -308,7 +305,7 @@
           "200" : {
             "description" : "The requested resource",
             "schema" : {
-              "$ref" : "#/definitions/asset"
+              "$ref" : "#/definitions/input"
             }
           },
           "404" : {
@@ -320,13 +317,13 @@
         }
       },
       "put" : {
-        "tags" : [ "Asset" ],
-        "summary" : "Update an Asset",
-        "description" : "Update an Asset which belongs to a specific job",
+        "tags" : [ "Input" ],
+        "summary" : "Update an Input",
+        "description" : "Update an Input which belongs to a specific job",
         "consumes" : [ "application/json" ],
         "produces" : [ "application/json" ],
         "parameters" : [ {
-          "name" : "assetId",
+          "name" : "inputId",
           "in" : "path",
           "required" : true,
           "type" : "string"
@@ -337,7 +334,7 @@
           "type" : "string"
         }, {
           "in" : "body",
-          "name" : "asset",
+          "name" : "input",
           "required" : true,
           "schema" : {
             "example" : {
@@ -351,7 +348,7 @@
           "200" : {
             "description" : "The requested resource",
             "schema" : {
-              "$ref" : "#/definitions/asset"
+              "$ref" : "#/definitions/input"
             }
           },
           "404" : {
@@ -363,9 +360,9 @@
         }
       },
       "delete" : {
-        "tags" : [ "Asset" ],
-        "summary" : "Delete an Asset",
-        "description" : "Delete an Asset which belongs to a specific job",
+        "tags" : [ "Input" ],
+        "summary" : "Delete an Input",
+        "description" : "Delete an Input which belongs to a specific job",
         "consumes" : [ "application/json" ],
         "produces" : [ "application/json" ],
         "parameters" : [ {
@@ -374,17 +371,14 @@
           "required" : true,
           "type" : "string"
         }, {
-          "name" : "assetId",
+          "name" : "inputId",
           "in" : "path",
           "required" : true,
           "type" : "string"
         } ],
         "responses" : {
-          "200" : {
-            "description" : "The requested resource",
-            "schema" : {
-              "$ref" : "#/definitions/asset"
-            }
+          "204" : {
+            "description" : "NoContent"
           },
           "404" : {
             "description" : "Resource not found"
@@ -421,7 +415,7 @@
       "post" : {
         "tags" : [ "Task" ],
         "summary" : "Create a Task",
-        "description" : "Creates a Task which will belong to a specific Job or Asset.",
+        "description" : "Creates a Task which will belong to a specific Job or Input.",
         "consumes" : [ "application/json" ],
         "produces" : [ "application/json" ],
         "parameters" : [ {
@@ -431,7 +425,7 @@
           "schema" : {
             "example" : {
               "jobId" : 1,
-              "assetId" : 1,
+              "inputId" : 1,
               "type" : "translation",
               "targetLanguage" : "cz",
               "assignedTo" : "symfonie.com/43920149320"
@@ -439,7 +433,7 @@
           }
         } ],
         "responses" : {
-          "200" : {
+          "201" : {
             "description" : "The requested resource",
             "schema" : {
               "$ref" : "#/definitions/task"
@@ -500,7 +494,7 @@
           "schema" : {
             "example" : {
               "jobId" : 1,
-              "assetId" : 1,
+              "inputId" : 1,
               "progress" : "paused",
               "type" : "translation",
               "targetLanguage" : "cz",
@@ -536,11 +530,8 @@
           "type" : "string"
         } ],
         "responses" : {
-          "200" : {
-            "description" : "The requested resource",
-            "schema" : {
-              "$ref" : "#/definitions/task"
-            }
+          "204" : {
+            "description" : "NoContent"
           },
           "404" : {
             "description" : "Resource not found"
@@ -571,7 +562,7 @@
           "type" : "file"
         } ],
         "responses" : {
-          "200" : {
+          "201" : {
             "description" : "The requested resource",
             "schema" : {
               "$ref" : "#/definitions/task"
@@ -612,11 +603,11 @@
         }
       }
     },
-    "/assets" : {
+    "/inputs" : {
       "get" : {
-        "tags" : [ "Asset" ],
-        "summary" : "List all Assets",
-        "description" : "List all Assets",
+        "tags" : [ "Input" ],
+        "summary" : "List all Inputs",
+        "description" : "List all Inputs",
         "consumes" : [ "application/json" ],
         "produces" : [ "application/json" ],
         "parameters" : [ ],
@@ -624,7 +615,7 @@
           "200" : {
             "description" : "The requested resource",
             "schema" : {
-              "$ref" : "#/definitions/asset"
+              "$ref" : "#/definitions/input"
             }
           },
           "404" : {
@@ -679,7 +670,7 @@
           }
         } ],
         "responses" : {
-          "200" : {
+          "201" : {
             "description" : "The requested resource",
             "schema" : {
               "$ref" : "#/definitions/webhook"
@@ -774,11 +765,8 @@
           "type" : "string"
         } ],
         "responses" : {
-          "200" : {
-            "description" : "The requested resource",
-            "schema" : {
-              "$ref" : "#/definitions/webhook"
-            }
+          "204" : {
+            "description" : "NoContent"
           },
           "404" : {
             "description" : "Resource not found"
@@ -831,10 +819,10 @@
           "format" : "string",
           "description" : "external project id, as is defined on the external system"
         },
-        "assets" : {
+        "inputs" : {
           "type" : "array",
           "items" : {
-            "$ref" : "#/definitions/asset"
+            "$ref" : "#/definitions/input"
           }
         },
         "closedAt" : {
@@ -850,91 +838,9 @@
           "type" : "string",
           "format" : "date-time"
         }
-      },
-      "example" : {
-        "dueAt" : "2000-01-23T04:56:07.000+00:00",
-        "submitter" : "symfonie.com/43920149320",
-        "createdAt" : "2000-01-23T04:56:07.000+00:00",
-        "assets" : [ {
-          "jobId" : 1,
-          "createdAt" : "2000-01-23T04:56:07.000+00:00",
-          "fileDescriptor" : "fileDescriptor",
-          "isReference" : true,
-          "id" : 6,
-          "encoding" : "encoding",
-          "sourceLanguage" : "sourceLanguage",
-          "tasks" : [ {
-            "jobId" : 5,
-            "createdAt" : "2000-01-23T04:56:07.000+00:00",
-            "targetLanguage" : "targetLanguage",
-            "fileDescriptor" : "fileDescriptor",
-            "assetId" : 2,
-            "progress" : "pending",
-            "id" : 5,
-            "type" : "translation",
-            "assignedTo" : "symfonie.com/43920149320",
-            "fileOriginalName" : "fileOriginalName",
-            "updatedAt" : "2000-01-23T04:56:07.000+00:00"
-          }, {
-            "jobId" : 5,
-            "createdAt" : "2000-01-23T04:56:07.000+00:00",
-            "targetLanguage" : "targetLanguage",
-            "fileDescriptor" : "fileDescriptor",
-            "assetId" : 2,
-            "progress" : "pending",
-            "id" : 5,
-            "type" : "translation",
-            "assignedTo" : "symfonie.com/43920149320",
-            "fileOriginalName" : "fileOriginalName",
-            "updatedAt" : "2000-01-23T04:56:07.000+00:00"
-          } ],
-          "fileOriginalName" : "fileOriginalName",
-          "updatedAt" : "2000-01-23T04:56:07.000+00:00"
-        }, {
-          "jobId" : 1,
-          "createdAt" : "2000-01-23T04:56:07.000+00:00",
-          "fileDescriptor" : "fileDescriptor",
-          "isReference" : true,
-          "id" : 6,
-          "encoding" : "encoding",
-          "sourceLanguage" : "sourceLanguage",
-          "tasks" : [ {
-            "jobId" : 5,
-            "createdAt" : "2000-01-23T04:56:07.000+00:00",
-            "targetLanguage" : "targetLanguage",
-            "fileDescriptor" : "fileDescriptor",
-            "assetId" : 2,
-            "progress" : "pending",
-            "id" : 5,
-            "type" : "translation",
-            "assignedTo" : "symfonie.com/43920149320",
-            "fileOriginalName" : "fileOriginalName",
-            "updatedAt" : "2000-01-23T04:56:07.000+00:00"
-          }, {
-            "jobId" : 5,
-            "createdAt" : "2000-01-23T04:56:07.000+00:00",
-            "targetLanguage" : "targetLanguage",
-            "fileDescriptor" : "fileDescriptor",
-            "assetId" : 2,
-            "progress" : "pending",
-            "id" : 5,
-            "type" : "translation",
-            "assignedTo" : "symfonie.com/43920149320",
-            "fileOriginalName" : "fileOriginalName",
-            "updatedAt" : "2000-01-23T04:56:07.000+00:00"
-          } ],
-          "fileOriginalName" : "fileOriginalName",
-          "updatedAt" : "2000-01-23T04:56:07.000+00:00"
-        } ],
-        "name" : "name",
-        "description" : "description",
-        "externalId" : "externalId",
-        "id" : 0,
-        "closedAt" : "2000-01-23T04:56:07.000+00:00",
-        "updatedAt" : "2000-01-23T04:56:07.000+00:00"
       }
     },
-    "asset" : {
+    "input" : {
       "properties" : {
         "id" : {
           "type" : "integer",
@@ -953,7 +859,7 @@
         },
         "isReference" : {
           "type" : "boolean",
-          "description" : "if is set to true, then the Asset is not suppossed to be actionable."
+          "description" : "if is set to true, then the Input is not suppossed to be actionable."
         },
         "sourceLanguage" : {
           "type" : "string",
@@ -982,42 +888,6 @@
           "type" : "string",
           "format" : "date-time"
         }
-      },
-      "example" : {
-        "jobId" : 1,
-        "createdAt" : "2000-01-23T04:56:07.000+00:00",
-        "fileDescriptor" : "fileDescriptor",
-        "isReference" : true,
-        "id" : 6,
-        "encoding" : "encoding",
-        "sourceLanguage" : "sourceLanguage",
-        "tasks" : [ {
-          "jobId" : 5,
-          "createdAt" : "2000-01-23T04:56:07.000+00:00",
-          "targetLanguage" : "targetLanguage",
-          "fileDescriptor" : "fileDescriptor",
-          "assetId" : 2,
-          "progress" : "pending",
-          "id" : 5,
-          "type" : "translation",
-          "assignedTo" : "symfonie.com/43920149320",
-          "fileOriginalName" : "fileOriginalName",
-          "updatedAt" : "2000-01-23T04:56:07.000+00:00"
-        }, {
-          "jobId" : 5,
-          "createdAt" : "2000-01-23T04:56:07.000+00:00",
-          "targetLanguage" : "targetLanguage",
-          "fileDescriptor" : "fileDescriptor",
-          "assetId" : 2,
-          "progress" : "pending",
-          "id" : 5,
-          "type" : "translation",
-          "assignedTo" : "symfonie.com/43920149320",
-          "fileOriginalName" : "fileOriginalName",
-          "updatedAt" : "2000-01-23T04:56:07.000+00:00"
-        } ],
-        "fileOriginalName" : "fileOriginalName",
-        "updatedAt" : "2000-01-23T04:56:07.000+00:00"
       }
     },
     "task" : {
@@ -1038,12 +908,16 @@
           "format" : "string",
           "description" : "language code of the target"
         },
-        "progress" : {
+        "status" : {
           "type" : "string",
           "format" : "string",
-          "description" : "pending - the Task has been created, and it's pending to be reviewed and assigned to someone.\n\nin progress - the Task has been assigned to someone and is being worked on.\n\npaused - the Task went from in progress, to paused, because something is blocking the Task, or the assignee has other priorities.\n\ncanceled - someone did cancel this Task.\n\nfinished - the work on this Task is done and deliverableLocation is filled with a path to deliverable.",
-          "enum" : [ "pending", "in progress", "paused", "canceled", "finished" ],
-          "default" : "pending"
+          "description" : "pending - the Task has been created, and it's pending to be reviewed and assigned to someone.\n\nin progress - the Task has been assigned to someone and is being worked on.\n\npaused - the Task went from in progress, to paused, because something is blocking the Task, or the assignee has other priorities.\n\ncanceled - someone did cancel this Task.\n\ncompleted - the work on this Task is done and deliverableLocation is filled with a path to deliverable.\ncompleted-with-warning - the work on this Task is done. But there is a warning probably in the Task note.\nfailed - Task could not be completed because an error occurred.",
+          "default" : "pending",
+          "enum" : [ "pending", "in progress", "paused", "canceled", "completed", "completed-with-warning", "failed" ]
+        },
+        "note" : {
+          "type" : "string",
+          "format" : "string"
         },
         "assignedTo" : {
           "type" : "string",
@@ -1064,7 +938,7 @@
         "jobId" : {
           "type" : "integer"
         },
-        "assetId" : {
+        "inputId" : {
           "type" : "integer"
         },
         "createdAt" : {
@@ -1075,19 +949,6 @@
           "type" : "string",
           "format" : "date-time"
         }
-      },
-      "example" : {
-        "jobId" : 5,
-        "createdAt" : "2000-01-23T04:56:07.000+00:00",
-        "targetLanguage" : "targetLanguage",
-        "fileDescriptor" : "fileDescriptor",
-        "assetId" : 2,
-        "progress" : "pending",
-        "id" : 5,
-        "type" : "translation",
-        "assignedTo" : "symfonie.com/43920149320",
-        "fileOriginalName" : "fileOriginalName",
-        "updatedAt" : "2000-01-23T04:56:07.000+00:00"
       }
     },
     "webhook" : {
@@ -1116,7 +977,7 @@
           "type" : "string",
           "format" : "string",
           "description" : "type of event - if this event occurs, then the \"url\" will be requested by the TAPICC server",
-          "enum" : [ "taskCreated", "taskUpdated", "taskDeleted", "jobCreated", "jobUpdated", "jobDeleted", "assetCreated", "assetUpdated", "assetDeleted" ]
+          "enum" : [ "taskCreated", "taskUpdated", "taskDeleted", "jobCreated", "jobUpdated", "jobDeleted", "inputCreated", "inputUpdated", "inputDeleted" ]
         },
         "createdAt" : {
           "type" : "string",
@@ -1126,15 +987,6 @@
           "type" : "string",
           "format" : "date-time"
         }
-      },
-      "example" : {
-        "createdAt" : "2000-01-23T04:56:07.000+00:00",
-        "name" : "name",
-        "description" : "description",
-        "id" : 0,
-        "eventType" : "taskCreated",
-        "url" : "url",
-        "updatedAt" : "2000-01-23T04:56:07.000+00:00"
       }
     }
   }
