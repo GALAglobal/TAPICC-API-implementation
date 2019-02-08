@@ -70,30 +70,30 @@ module.exports.routes = {
     action: 'update'
   },
 
-  'DELETE /jobs/:parentid/assets/:id': {
-    controller: 'AssetController',
+  'DELETE /jobs/:parentid/inputs/:id': {
+    controller: 'InputController',
     action: 'destroy'
   },
-  'GET /jobs/:parentid/assets/:id': {
-    controller: 'AssetController',
+  'GET /jobs/:parentid/inputs/:id': {
+    controller: 'InputController',
     action: 'findOne'
   },
-  'PUT /jobs/:parentid/assets/:id': {
-    controller: 'AssetController',
+  'PUT /jobs/:parentid/inputs/:id': {
+    controller: 'InputController',
     action: 'update'
   },
-  'GET /jobs/:parentid/assets': {
-    controller: 'AssetController',
+  'GET /jobs/:parentid/inputs': {
+    controller: 'InputController',
     action: 'find'
   },
 
-  'POST /jobs/:parentid/assets/uploadfile':
+  'POST /jobs/:parentid/inputs/uploadfile':
   {
-    controller: 'AssetController',
+    controller: 'InputController',
     action: 'uploadFile'
   },
-  'GET /jobs/:parentid/assets/:id/downloadfile': {
-    controller: 'AssetController',
+  'GET /jobs/:parentid/inputs/:id/downloadfile': {
+    controller: 'InputController',
     action: 'downloadFile'
   },
 
@@ -128,9 +128,9 @@ module.exports.routes = {
     action: 'downloadFile'
   },
 
-  // asset
-  'GET /assets': {
-    controller: 'AssetController',
+  // input
+  'GET /inputs': {
+    controller: 'InputController',
     action: 'find'
   },
 

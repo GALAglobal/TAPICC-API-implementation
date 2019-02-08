@@ -1,16 +1,16 @@
-declare var Job, Asset, Task, Account;
+declare var Job, Input, Task, Account;
 
 
 module.exports = {
     'index': (req, res) => {
-        let JobsCount, AssetsCount, TasksCount, AccountsCount;
+        let JobsCount, InputsCount, TasksCount, AccountsCount;
         Job.count()
         .then((val) => {
             JobsCount = val;
-            return Asset.count();
+            return Input.count();
         })
         .then((val) => {
-            AssetsCount = val;
+            InputsCount = val;
             return Task.count();
         })
         .then((val) => {
@@ -22,7 +22,7 @@ module.exports = {
             res.json({
                 serverStatus: 'online',
                 JobsCount,
-                AssetsCount,
+                InputsCount,
                 TasksCount,
                 AccountsCount
             });

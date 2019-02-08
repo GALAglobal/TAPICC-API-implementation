@@ -36,8 +36,8 @@ module.exports = {
       required: true
     },
 
-    assets: {
-      collection: 'asset',
+    inputs: {
+      collection: 'input',
       via: 'jobId'
     },
 

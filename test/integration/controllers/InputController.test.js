@@ -4,9 +4,9 @@ var _ = require('lodash');
 var constants = require('../../../constants');
 var createLocalHostAccount = require('../../../functions').createLocalHostAccount;
 
-describe('AssetController', function () {
+describe('InputController', function () {
 
-  describe('POST /jobs/:parentid/assets/uploadfile', function () {
+  describe('POST /jobs/:parentid/inputs/uploadfile', function () {
     beforeEach(function (done) {
       const cb = () => Job.create({
         id: 1,
@@ -21,13 +21,13 @@ describe('AssetController', function () {
       sails.emit('hook:orm:reload');
     });
 
-    it('should handle file upload and asset creation', function (done) {
+    it('should handle file upload and input creation', function (done) {
       request(sails.hooks.http.app)
-        .post('/jobs/1/assets/uploadfile')
+        .post('/jobs/1/inputs/uploadfile')
         .set('Authorization', 'Bearer ' + constants.ROOT_USER_API_KEY)
         .field('sourceLanguage', 'en')
         .field('encoding', 'utf8')
-        .attach('asset', 'test/fixtures/testAssetFile.txt')
+        .attach('input', 'test/fixtures/testInputFile.txt')
         .expect(200)
         .then((response) => {
           expect(_.omit(response.body, ['updatedAt', 'createdAt'])).toEqual({
@@ -36,16 +36,16 @@ describe('AssetController', function () {
             sourceLanguage: 'en',
             encoding: 'utf8',
             fileDescriptor: response.body.fileDescriptor,
-            fileOriginalName: 'testAssetFile.txt'
+            fileOriginalName: 'testInputFile.txt'
           });
 
-          Job.findOne(1).populate('assets').exec(function (err, res) {
+          Job.findOne(1).populate('inputs').exec(function (err, res) {
             expect(err).toBe(null)
             expect(_.omit(res.toJSON(), ['createdAt', 'updatedAt'])).toEqual({
               id: 1,
               name: 'first job',
               submitter: 'symfonie.com/123',
-              assets: [response.body]
+              inputs: [response.body]
             });
             done()
           });

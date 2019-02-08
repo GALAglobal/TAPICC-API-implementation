@@ -11,14 +11,14 @@ describe('TaskController', function () {
       name: 'first job',
       submitter: 'symfonie.com/123'
     }],
-    assets: [{
+    inputs: [{
       id: 1,
       jobId: 1
     }],
     tasks: [{
       id: 1,
       jobId: 1,
-      assetId: 1,
+      inputId: 1,
       progress: 'pending',
       type: 'translation'
     }]
@@ -26,7 +26,7 @@ describe('TaskController', function () {
   describe('POST /tasks/:id/uploaddeliverable', function () {
     beforeEach(function (done) {
       const cb = () => Job.create(fixtures.jobs[0]).then(() => {
-        return Asset.create(fixtures.assets[0])
+        return Input.create(fixtures.inputs[0])
       }).then(() => {
         return Task.create(fixtures.tasks[0])
       }).then(() => {
@@ -46,18 +46,18 @@ describe('TaskController', function () {
         .attach('deliverable', 'test/fixtures/testDeliverableFile.txt')
         .expect(200)
         .then((response) => {
-          Asset.findOne(fixtures.assets[0].id).populate('tasks').exec(function (err, res) {
-            const asset = res.toJSON();
-            const expectedTask = _.merge(fixtures.tasks[0], _.pick(asset.tasks[0], ['createdAt', 'updatedAt']));
-            expectedTask.fileDescriptor = asset.tasks[0].fileDescriptor;
+          Input.findOne(fixtures.inputs[0].id).populate('tasks').exec(function (err, res) {
+            const input = res.toJSON();
+            const expectedTask = _.merge(fixtures.tasks[0], _.pick(input.tasks[0], ['createdAt', 'updatedAt']));
+            expectedTask.fileDescriptor = input.tasks[0].fileDescriptor;
             expectedTask.fileOriginalName = 'testDeliverableFile.txt';
             expectedTask.progress = 'finished';
             expect(err).toBe(null)
-            expect(asset).toEqual({
+            expect(input).toEqual({
               id: 1,
               jobId: 1,
-              createdAt: asset.createdAt,
-              updatedAt: asset.updatedAt,
+              createdAt: input.createdAt,
+              updatedAt: input.updatedAt,
               tasks: [expectedTask]
             });
             done()

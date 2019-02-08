@@ -48,8 +48,8 @@ export = {
       required: true
     },
 
-    assetId: {
-      model: 'asset'
+    inputId: {
+      model: 'input'
     }
   }
 

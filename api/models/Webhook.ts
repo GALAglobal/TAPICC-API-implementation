@@ -37,9 +37,9 @@ module.exports = {
         'jobCreated',
         'jobUpdated',
         'jobDeleted',
-        'assetCreated',
-        'assetUpdated',
-        'assetDeleted'
+        'inputCreated',
+        'inputUpdated',
+        'inputDeleted'
       ],
       required: true
     }

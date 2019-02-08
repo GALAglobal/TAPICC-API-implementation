@@ -1,21 +1,21 @@
 /**
- * AssetController
+ * InputController
  *
- * @description :: Server-side logic for managing assets
+ * @description :: Server-side logic for managing Inputs
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
 import { Model } from 'sails-typings';
-declare var Asset: Model;
+declare var Input: Model;
 declare var sails;
 const path = require('path');
 
 module.exports = {
 
   'uploadFile': (req, res) => {
-    const dirname = path.resolve(sails.config.appPath, 'assets/assets');
+    const dirname = path.resolve(sails.config.appPath, 'assets/inputs');
     req.file('asset').upload({ dirname }, function (err, uploadedFiles) {
       if (err) return res.serverError(err);
-      Asset.create({
+      Input.create({
         sourceLanguage: req.param('sourceLanguage'),
         encoding: req.param('encoding'),
         jobId: req.param('parentid'),
@@ -29,19 +29,19 @@ module.exports = {
   },
 
   'downloadFile': (req, res) => {
-    Asset.findOne(req.param('id')).exec(function (err, asset) {
+    Input.findOne(req.param('id')).exec(function (err, input) {
       if (err) return res.serverError(err);
-      if (!asset) return res.notFound();
-      if (!asset.fileDescriptor) return res.notFound();
+      if (!input) return res.notFound();
+      if (!input.fileDescriptor) return res.notFound();
 
       const SkipperDisk = require('skipper-disk');
       const fileAdapter = SkipperDisk();
 
       // set the filename to the same file as the user uploaded
-      res.set("Content-disposition", "attachment; filename=" + asset.fileOriginalName + "");
+      res.set("Content-disposition", "attachment; filename=" + input.fileOriginalName + "");
       
       // Stream the file down
-      fileAdapter.read(asset.fileDescriptor)
+      fileAdapter.read(input.fileDescriptor)
         .on('error', function (err) {
           return res.serverError(err);
         })
