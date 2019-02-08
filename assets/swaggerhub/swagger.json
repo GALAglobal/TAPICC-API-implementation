@@ -920,12 +920,16 @@
           "format" : "string",
           "description" : "language code of the target"
         },
-        "progress" : {
+        "status" : {
           "type" : "string",
           "format" : "string",
-          "description" : "pending - the Task has been created, and it's pending to be reviewed and assigned to someone.\n\nin progress - the Task has been assigned to someone and is being worked on.\n\npaused - the Task went from in progress, to paused, because something is blocking the Task, or the assignee has other priorities.\n\ncanceled - someone did cancel this Task.\n\nfinished - the work on this Task is done and deliverableLocation is filled with a path to deliverable.",
+          "description" : "pending - the Task has been created, and it's pending to be reviewed and assigned to someone.\n\nin progress - the Task has been assigned to someone and is being worked on.\n\npaused - the Task went from in progress, to paused, because something is blocking the Task, or the assignee has other priorities.\n\ncanceled - someone did cancel this Task.\n\ncompleted - the work on this Task is done and deliverableLocation is filled with a path to deliverable.\ncompleted-with-warning - the work on this Task is done. But there is a warning probably in the Task note.\nfailed - Task could not be completed because an error occurred.",
           "default" : "pending",
-          "enum" : [ "pending", "in progress", "paused", "canceled", "finished" ]
+          "enum" : [ "pending", "in progress", "paused", "canceled", "completed", "completed-with-warning", "failed" ]
+        },
+        "note" : {
+          "type" : "string",
+          "format" : "string"
         },
         "assignedTo" : {
           "type" : "string",
