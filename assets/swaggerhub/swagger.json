@@ -70,7 +70,7 @@
           }
         } ],
         "responses" : {
-          "200" : {
+          "201" : {
             "description" : "The requested resource",
             "schema" : {
               "$ref" : "#/definitions/job"
@@ -439,7 +439,7 @@
           }
         } ],
         "responses" : {
-          "200" : {
+          "201" : {
             "description" : "The requested resource",
             "schema" : {
               "$ref" : "#/definitions/task"
@@ -571,7 +571,7 @@
           "type" : "file"
         } ],
         "responses" : {
-          "200" : {
+          "201" : {
             "description" : "The requested resource",
             "schema" : {
               "$ref" : "#/definitions/task"
@@ -679,7 +679,7 @@
           }
         } ],
         "responses" : {
-          "200" : {
+          "201" : {
             "description" : "The requested resource",
             "schema" : {
               "$ref" : "#/definitions/webhook"
