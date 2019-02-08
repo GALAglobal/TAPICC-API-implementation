@@ -166,11 +166,8 @@
           "type" : "string"
         } ],
         "responses" : {
-          "200" : {
-            "description" : "The requested resource",
-            "schema" : {
-              "$ref" : "#/definitions/job"
-            }
+          "204" : {
+            "description" : "NoContent"
           },
           "404" : {
             "description" : "Resource not found"
@@ -211,7 +208,7 @@
           "type" : "file"
         } ],
         "responses" : {
-          "200" : {
+          "201" : {
             "description" : "The requested resource",
             "schema" : {
               "$ref" : "#/definitions/input"
@@ -380,11 +377,8 @@
           "type" : "string"
         } ],
         "responses" : {
-          "200" : {
-            "description" : "The requested resource",
-            "schema" : {
-              "$ref" : "#/definitions/input"
-            }
+          "204" : {
+            "description" : "NoContent"
           },
           "404" : {
             "description" : "Resource not found"
@@ -536,11 +530,8 @@
           "type" : "string"
         } ],
         "responses" : {
-          "200" : {
-            "description" : "The requested resource",
-            "schema" : {
-              "$ref" : "#/definitions/task"
-            }
+          "204" : {
+            "description" : "NoContent"
           },
           "404" : {
             "description" : "Resource not found"
@@ -774,11 +765,8 @@
           "type" : "string"
         } ],
         "responses" : {
-          "200" : {
-            "description" : "The requested resource",
-            "schema" : {
-              "$ref" : "#/definitions/webhook"
-            }
+          "204" : {
+            "description" : "NoContent"
           },
           "404" : {
             "description" : "Resource not found"
