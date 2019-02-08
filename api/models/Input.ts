@@ -27,7 +27,7 @@ module.exports = {
       type: 'boolean'
     },
 
-    sourceLanguage: {
+    languageCode: {
       type: 'string'
     },
 
@@ -41,7 +41,8 @@ module.exports = {
 
     tasks: {
       collection: 'task',
-      via: 'inputId'
+      via: 'inputs',
+      dominant: true
     }
   },
 

@@ -48,8 +48,9 @@ export = {
       required: true
     },
 
-    inputId: {
-      model: 'input'
+    inputs: {
+      model: 'input',
+      via: 'tasks'
     }
   }
 
