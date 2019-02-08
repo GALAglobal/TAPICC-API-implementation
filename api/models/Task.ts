@@ -25,9 +25,9 @@ export = {
       type: 'string'
     },
 
-    progress: {
+    status: {
       type: 'string',
-      enum: ['pending', 'in progress', 'paused', 'canceled', 'finished'],
+      enum: ['pending', 'in progress', 'paused', 'canceled', 'completed', 'completed-with-warning', 'failed'],
       defaultsTo: 'pending'
     },
 
