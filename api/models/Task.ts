@@ -17,7 +17,27 @@ export = {
 
     type: {
       type: 'string',
-      enum: ['translation', 'machine translation', 'modification', 'proof'],
+      enum: [
+        'Translation',
+        'Localization',
+        'Literary editing',
+        'Technical editing',
+        'Proofreading',
+        'Reconciliation',
+        'Review',
+        'Review with LQA',
+        'Terminology extraction',
+        'Linguistic verification',
+        'Technical verification',
+        'MT post-editing',
+        'Light MT post-editing',
+        'Creating voice over script from audio/video',
+        'Retyping handwritten text',
+        'Copywriting',
+        'Copyediting',
+        'Technical writing',
+        'Adaptation'
+      ],
       required: true
     },
 
