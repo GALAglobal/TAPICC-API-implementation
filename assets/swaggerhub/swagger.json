@@ -19,7 +19,7 @@
   }, {
     "name" : "Task"
   }, {
-    "name" : "Webhook"
+    "name" : "Deliverable"
   } ],
   "schemes" : [ "http" ],
   "security" : [ {
@@ -178,7 +178,7 @@
         }
       }
     },
-    "/jobs/{jobId}/inputs/uploadfile" : {
+    "/inputs/" : {
       "post" : {
         "tags" : [ "Input" ],
         "summary" : "Upload an input file and create an input",
@@ -187,18 +187,8 @@
         "produces" : [ "application/json" ],
         "parameters" : [ {
           "name" : "jobId",
-          "in" : "path",
-          "required" : true,
-          "type" : "string"
-        }, {
-          "name" : "sourceLanguage",
           "in" : "formData",
           "required" : true,
-          "type" : "string"
-        }, {
-          "name" : "encoding",
-          "in" : "formData",
-          "required" : false,
           "type" : "string"
         }, {
           "name" : "input",
@@ -206,6 +196,26 @@
           "description" : "The Input file",
           "required" : true,
           "type" : "file"
+        }, {
+          "name" : "name",
+          "in" : "formData",
+          "description" : "name of the input",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "fileType",
+          "in" : "formData",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "taskIds",
+          "in" : "formData",
+          "required" : false,
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          },
+          "collectionFormat" : "multi"
         } ],
         "responses" : {
           "201" : {
@@ -223,7 +233,7 @@
         }
       }
     },
-    "/jobs/{jobId}/inputs/{inputId}/downloadfile" : {
+    "/inputs/{inputId}/file" : {
       "get" : {
         "tags" : [ "Input" ],
         "summary" : "Download an input file",
@@ -231,11 +241,6 @@
         "consumes" : [ "application/json" ],
         "produces" : [ "application/json" ],
         "parameters" : [ {
-          "name" : "jobId",
-          "in" : "path",
-          "required" : true,
-          "type" : "string"
-        }, {
           "name" : "inputId",
           "in" : "path",
           "required" : true,
@@ -254,48 +259,14 @@
         }
       }
     },
-    "/jobs/{jobId}/inputs" : {
-      "get" : {
-        "tags" : [ "Input" ],
-        "summary" : "List all Inputs within a Job",
-        "description" : "List all Inputs which belongs to a specific job",
-        "consumes" : [ "application/json" ],
-        "produces" : [ "application/json" ],
-        "parameters" : [ {
-          "name" : "jobId",
-          "in" : "path",
-          "required" : true,
-          "type" : "string"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "The requested resource",
-            "schema" : {
-              "$ref" : "#/definitions/input"
-            }
-          },
-          "404" : {
-            "description" : "Resource not found"
-          },
-          "500" : {
-            "description" : "Internal server error"
-          }
-        }
-      }
-    },
-    "/jobs/{jobId}/inputs/{inputId}" : {
+    "/inputs/{inputId}" : {
       "get" : {
         "tags" : [ "Input" ],
         "summary" : "Get an Input",
-        "description" : "Get an Input which belongs to a specific job",
+        "description" : "Get an Input",
         "consumes" : [ "application/json" ],
         "produces" : [ "application/json" ],
         "parameters" : [ {
-          "name" : "jobId",
-          "in" : "path",
-          "required" : true,
-          "type" : "string"
-        }, {
           "name" : "inputId",
           "in" : "path",
           "required" : true,
@@ -319,16 +290,11 @@
       "put" : {
         "tags" : [ "Input" ],
         "summary" : "Update an Input",
-        "description" : "Update an Input which belongs to a specific job",
+        "description" : "Update an Input",
         "consumes" : [ "application/json" ],
         "produces" : [ "application/json" ],
         "parameters" : [ {
           "name" : "inputId",
-          "in" : "path",
-          "required" : true,
-          "type" : "string"
-        }, {
-          "name" : "jobId",
           "in" : "path",
           "required" : true,
           "type" : "string"
@@ -338,9 +304,8 @@
           "required" : true,
           "schema" : {
             "example" : {
-              "sourceLanguage" : "sk",
-              "encoding" : "utf8",
-              "jobId" : 1
+              "name" : "myTranslations",
+              "fileType" : "zip"
             }
           }
         } ],
@@ -362,16 +327,183 @@
       "delete" : {
         "tags" : [ "Input" ],
         "summary" : "Delete an Input",
-        "description" : "Delete an Input which belongs to a specific job",
+        "description" : "Delete an Input",
         "consumes" : [ "application/json" ],
         "produces" : [ "application/json" ],
         "parameters" : [ {
+          "name" : "inputId",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "NoContent"
+          },
+          "404" : {
+            "description" : "Resource not found"
+          },
+          "500" : {
+            "description" : "Internal server error"
+          }
+        }
+      }
+    },
+    "/deliverables/" : {
+      "post" : {
+        "tags" : [ "Deliverable" ],
+        "summary" : "Upload a deliverable file and create a deliverable",
+        "description" : "Upload a deliverable file and create a deliverable",
+        "consumes" : [ "multipart/form-data" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
           "name" : "jobId",
+          "in" : "formData",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "taskId",
+          "in" : "formData",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "name" : "deliverable",
+          "in" : "formData",
+          "description" : "The Deliverable file",
+          "required" : true,
+          "type" : "file"
+        }, {
+          "name" : "name",
+          "in" : "formData",
+          "description" : "name of the deliverable",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "fileType",
+          "in" : "formData",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "inputId",
+          "in" : "formData",
+          "required" : false,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "201" : {
+            "description" : "The requested resource",
+            "schema" : {
+              "$ref" : "#/definitions/deliverable"
+            }
+          },
+          "404" : {
+            "description" : "Resource not found"
+          },
+          "500" : {
+            "description" : "Internal server error"
+          }
+        }
+      }
+    },
+    "/deliverables/{deliverableId}/file" : {
+      "get" : {
+        "tags" : [ "Deliverable" ],
+        "summary" : "Download a deliverable file",
+        "description" : "Download a deliverable file",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "deliverableId",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "The deliverable file"
+          },
+          "404" : {
+            "description" : "Resource not found"
+          },
+          "500" : {
+            "description" : "Internal server error"
+          }
+        }
+      }
+    },
+    "/deliverables/{deliverableId}" : {
+      "get" : {
+        "tags" : [ "Deliverable" ],
+        "summary" : "Get a Deliverable",
+        "description" : "Get a Deliverable",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "deliverableId",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "The requested resource",
+            "schema" : {
+              "$ref" : "#/definitions/deliverable"
+            }
+          },
+          "404" : {
+            "description" : "Resource not found"
+          },
+          "500" : {
+            "description" : "Internal server error"
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "Deliverable" ],
+        "summary" : "Update a Deliverable",
+        "description" : "Update a Deliverable",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "deliverableId",
           "in" : "path",
           "required" : true,
           "type" : "string"
         }, {
-          "name" : "inputId",
+          "in" : "body",
+          "name" : "deliverable",
+          "required" : true,
+          "schema" : {
+            "example" : {
+              "name" : "myTranslations",
+              "fileType" : "zip"
+            }
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "The requested resource",
+            "schema" : {
+              "$ref" : "#/definitions/deliverable"
+            }
+          },
+          "404" : {
+            "description" : "Resource not found"
+          },
+          "500" : {
+            "description" : "Internal server error"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "Deliverable" ],
+        "summary" : "Delete a Deliverable",
+        "description" : "Delete an Deliverable",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "deliverableId",
           "in" : "path",
           "required" : true,
           "type" : "string"
@@ -542,46 +674,11 @@
         }
       }
     },
-    "/tasks/{taskId}/uploaddeliverable" : {
-      "post" : {
-        "tags" : [ "Task" ],
-        "summary" : "Upload deliverable file",
-        "description" : "Upload deliverable file",
-        "consumes" : [ "multipart/form-data" ],
-        "produces" : [ "application/json" ],
-        "parameters" : [ {
-          "name" : "taskId",
-          "in" : "path",
-          "required" : true,
-          "type" : "string"
-        }, {
-          "name" : "deliverable",
-          "in" : "formData",
-          "description" : "The deliverable file",
-          "required" : true,
-          "type" : "file"
-        } ],
-        "responses" : {
-          "201" : {
-            "description" : "The requested resource",
-            "schema" : {
-              "$ref" : "#/definitions/task"
-            }
-          },
-          "404" : {
-            "description" : "Resource not found"
-          },
-          "500" : {
-            "description" : "Internal server error"
-          }
-        }
-      }
-    },
-    "/tasks/{taskId}/downloaddeliverable" : {
+    "/tasks/{taskId}/downloadinputs" : {
       "get" : {
         "tags" : [ "Task" ],
-        "summary" : "Download deliverable file",
-        "description" : "Download deliverable file",
+        "summary" : "Download zip file with inputs",
+        "description" : "Download input files in a zip",
         "consumes" : [ "application/json" ],
         "produces" : [ "application/json" ],
         "parameters" : [ {
@@ -592,7 +689,33 @@
         } ],
         "responses" : {
           "200" : {
-            "description" : "The deliverable file"
+            "description" : "The zip file with inputs"
+          },
+          "404" : {
+            "description" : "Resource not found"
+          },
+          "500" : {
+            "description" : "Internal server error"
+          }
+        }
+      }
+    },
+    "/tasks/{taskId}/downloaddeliverables" : {
+      "get" : {
+        "tags" : [ "Task" ],
+        "summary" : "Download zip file with deliverables",
+        "description" : "Download deliverable files in a zip",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "taskId",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "The zip file with deliverables"
           },
           "404" : {
             "description" : "Resource not found"
@@ -617,156 +740,6 @@
             "schema" : {
               "$ref" : "#/definitions/input"
             }
-          },
-          "404" : {
-            "description" : "Resource not found"
-          },
-          "500" : {
-            "description" : "Internal server error"
-          }
-        }
-      }
-    },
-    "/webhooks" : {
-      "get" : {
-        "tags" : [ "Webhook" ],
-        "summary" : "List all Webhooks",
-        "description" : "List all Webhooks",
-        "consumes" : [ "application/json" ],
-        "produces" : [ "application/json" ],
-        "parameters" : [ ],
-        "responses" : {
-          "200" : {
-            "description" : "The requested resource",
-            "schema" : {
-              "$ref" : "#/definitions/webhook"
-            }
-          },
-          "404" : {
-            "description" : "Resource not found"
-          },
-          "500" : {
-            "description" : "Internal server error"
-          }
-        }
-      },
-      "post" : {
-        "tags" : [ "Webhook" ],
-        "summary" : "Create a Webhook",
-        "description" : "Create a Webhook",
-        "consumes" : [ "application/json" ],
-        "produces" : [ "application/json" ],
-        "parameters" : [ {
-          "in" : "body",
-          "name" : "webhook",
-          "required" : true,
-          "schema" : {
-            "example" : {
-              "name" : "name of the webhook",
-              "description" : "more details about this webhook",
-              "url" : "url that will be visited by TAPICC server",
-              "eventType" : "taskCreated"
-            }
-          }
-        } ],
-        "responses" : {
-          "201" : {
-            "description" : "The requested resource",
-            "schema" : {
-              "$ref" : "#/definitions/webhook"
-            }
-          },
-          "404" : {
-            "description" : "Resource not found"
-          },
-          "500" : {
-            "description" : "Internal server error"
-          }
-        }
-      }
-    },
-    "/webhooks/{webhookId}" : {
-      "get" : {
-        "tags" : [ "Webhook" ],
-        "summary" : "Get a Webhook",
-        "description" : "Get a Webhook",
-        "consumes" : [ "application/json" ],
-        "produces" : [ "application/json" ],
-        "parameters" : [ {
-          "name" : "webhookId",
-          "in" : "path",
-          "required" : true,
-          "type" : "string"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "The requested resource",
-            "schema" : {
-              "$ref" : "#/definitions/webhook"
-            }
-          },
-          "404" : {
-            "description" : "Resource not found"
-          },
-          "500" : {
-            "description" : "Internal server error"
-          }
-        }
-      },
-      "put" : {
-        "tags" : [ "Webhook" ],
-        "summary" : "Update a Webhook",
-        "description" : "Update a Webhook",
-        "consumes" : [ "application/json" ],
-        "produces" : [ "application/json" ],
-        "parameters" : [ {
-          "name" : "webhookId",
-          "in" : "path",
-          "required" : true,
-          "type" : "string"
-        }, {
-          "in" : "body",
-          "name" : "webhook",
-          "required" : true,
-          "schema" : {
-            "example" : {
-              "name" : "name of the webhook",
-              "description" : "more details about this webhook",
-              "url" : "url that will be visited by TAPICC server",
-              "eventType" : "taskCreated"
-            }
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "The requested resource",
-            "schema" : {
-              "$ref" : "#/definitions/webhook"
-            }
-          },
-          "404" : {
-            "description" : "Resource not found"
-          },
-          "500" : {
-            "description" : "Internal server error"
-          }
-        }
-      },
-      "delete" : {
-        "tags" : [ "Webhook" ],
-        "summary" : "Delete a Webhook",
-        "description" : "Delete a Webhook",
-        "consumes" : [ "application/json" ],
-        "produces" : [ "application/json" ],
-        "parameters" : [ {
-          "name" : "webhookId",
-          "in" : "path",
-          "required" : true,
-          "type" : "string"
-        } ],
-        "responses" : {
-          "204" : {
-            "description" : "NoContent"
           },
           "404" : {
             "description" : "Resource not found"
@@ -847,6 +820,28 @@
           "format" : "int32",
           "description" : "(auto-generated)"
         },
+        "jobId" : {
+          "type" : "integer"
+        },
+        "name" : {
+          "type" : "string"
+        },
+        "fileType" : {
+          "type" : "string",
+          "enum" : [ "bitext", "source", "instructions", "glossary", "TM", "reference", "zip", "report" ]
+        },
+        "taskIds" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "deliverableIds" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
         "fileDescriptor" : {
           "type" : "string",
           "format" : "string",
@@ -857,28 +852,49 @@
           "format" : "string",
           "description" : "original name of the file as uploaded. (auto-filled)"
         },
-        "isReference" : {
-          "type" : "boolean",
-          "description" : "if is set to true, then the Input is not suppossed to be actionable."
-        },
-        "sourceLanguage" : {
+        "createdAt" : {
           "type" : "string",
-          "format" : "string",
-          "description" : "language code of the source"
+          "format" : "date-time"
         },
-        "encoding" : {
+        "updatedAt" : {
           "type" : "string",
-          "format" : "string",
-          "description" : "encoding code"
+          "format" : "date-time"
+        }
+      }
+    },
+    "deliverable" : {
+      "properties" : {
+        "id" : {
+          "type" : "integer",
+          "format" : "int32",
+          "description" : "(auto-generated)"
         },
         "jobId" : {
           "type" : "integer"
         },
-        "tasks" : {
-          "type" : "array",
-          "items" : {
-            "$ref" : "#/definitions/task"
-          }
+        "name" : {
+          "type" : "string"
+        },
+        "fileType" : {
+          "type" : "string",
+          "enum" : [ "bitext", "source", "instructions", "glossary", "TM", "reference", "zip", "report" ]
+        },
+        "taskId" : {
+          "type" : "string"
+        },
+        "inputId" : {
+          "type" : "string",
+          "description" : "is used only if the Deliverable has one parent Input"
+        },
+        "fileDescriptor" : {
+          "type" : "string",
+          "format" : "string",
+          "description" : "unique name of the file. (auto-generated)"
+        },
+        "fileOriginalName" : {
+          "type" : "string",
+          "format" : "string",
+          "description" : "original name of the file as uploaded. (auto-filled)"
         },
         "createdAt" : {
           "type" : "string",
@@ -903,6 +919,11 @@
           "format" : "string",
           "enum" : [ "Translation", "Localization", "Literary editing", "Technical editing", "Proofreading", "Reconciliation", "Review", "Review with LQA", "Terminology extraction", "Linguistic verification", "Technical verification", "MT post-editing", "Light MT post-editing", "Creating voice over script from audio/video", "Retyping handwritten text", "Copywriting", "Copyediting", "Technical writing", "Adaptation" ]
         },
+        "sourceLanguage" : {
+          "type" : "string",
+          "format" : "string",
+          "description" : "language code of the source"
+        },
         "targetLanguage" : {
           "type" : "string",
           "format" : "string",
@@ -925,21 +946,24 @@
           "example" : "symfonie.com/43920149320",
           "description" : "\"server name / id\" of the user who it is assigned to"
         },
-        "fileDescriptor" : {
-          "type" : "string",
-          "format" : "string",
-          "description" : "unique name of the file. (auto-generated)"
-        },
-        "fileOriginalName" : {
-          "type" : "string",
-          "format" : "string",
-          "description" : "original name of the file as uploaded. (auto-filled)"
-        },
         "jobId" : {
           "type" : "integer"
         },
-        "inputId" : {
-          "type" : "integer"
+        "inputIds" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "deliverableIds" : {
+          "type" : "array",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "submittedAt" : {
+          "type" : "string",
+          "format" : "date-time"
         },
         "createdAt" : {
           "type" : "string",
@@ -948,42 +972,8 @@
         "updatedAt" : {
           "type" : "string",
           "format" : "date-time"
-        }
-      }
-    },
-    "webhook" : {
-      "required" : [ "eventType", "url" ],
-      "properties" : {
-        "id" : {
-          "type" : "integer",
-          "format" : "int32",
-          "description" : "(auto-generated)"
         },
-        "name" : {
-          "type" : "string",
-          "format" : "string",
-          "description" : "name of the Webhook"
-        },
-        "description" : {
-          "type" : "string",
-          "format" : "string"
-        },
-        "url" : {
-          "type" : "string",
-          "format" : "string",
-          "description" : "url which the server will make a request to when an event occurs"
-        },
-        "eventType" : {
-          "type" : "string",
-          "format" : "string",
-          "description" : "type of event - if this event occurs, then the \"url\" will be requested by the TAPICC server",
-          "enum" : [ "taskCreated", "taskUpdated", "taskDeleted", "jobCreated", "jobUpdated", "jobDeleted", "inputCreated", "inputUpdated", "inputDeleted" ]
-        },
-        "createdAt" : {
-          "type" : "string",
-          "format" : "date-time"
-        },
-        "updatedAt" : {
+        "deliveredAt" : {
           "type" : "string",
           "format" : "date-time"
         }
