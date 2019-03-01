@@ -20,6 +20,8 @@
     "name" : "Task"
   }, {
     "name" : "Deliverable"
+  }, {
+    "name" : "Webhook"
   } ],
   "schemes" : [ "http" ],
   "security" : [ {
@@ -749,6 +751,156 @@
           }
         }
       }
+    },
+    "/webhooks" : {
+      "get" : {
+        "tags" : [ "Webhook" ],
+        "summary" : "List all Webhooks",
+        "description" : "List all Webhooks",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ ],
+        "responses" : {
+          "200" : {
+            "description" : "The requested resource",
+            "schema" : {
+              "$ref" : "#/definitions/webhook"
+            }
+          },
+          "404" : {
+            "description" : "Resource not found"
+          },
+          "500" : {
+            "description" : "Internal server error"
+          }
+        }
+      },
+      "post" : {
+        "tags" : [ "Webhook" ],
+        "summary" : "Create a Webhook",
+        "description" : "Create a Webhook",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "in" : "body",
+          "name" : "webhook",
+          "required" : true,
+          "schema" : {
+            "example" : {
+              "name" : "name of the webhook",
+              "description" : "more details about this webhook",
+              "url" : "url that will be visited by TAPICC server",
+              "eventType" : "taskCreated"
+            }
+          }
+        } ],
+        "responses" : {
+          "201" : {
+            "description" : "The requested resource",
+            "schema" : {
+              "$ref" : "#/definitions/webhook"
+            }
+          },
+          "404" : {
+            "description" : "Resource not found"
+          },
+          "500" : {
+            "description" : "Internal server error"
+          }
+        }
+      }
+    },
+    "/webhooks/{webhookId}" : {
+      "get" : {
+        "tags" : [ "Webhook" ],
+        "summary" : "Get a Webhook",
+        "description" : "Get a Webhook",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "webhookId",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "The requested resource",
+            "schema" : {
+              "$ref" : "#/definitions/webhook"
+            }
+          },
+          "404" : {
+            "description" : "Resource not found"
+          },
+          "500" : {
+            "description" : "Internal server error"
+          }
+        }
+      },
+      "put" : {
+        "tags" : [ "Webhook" ],
+        "summary" : "Update a Webhook",
+        "description" : "Update a Webhook",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "webhookId",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        }, {
+          "in" : "body",
+          "name" : "webhook",
+          "required" : true,
+          "schema" : {
+            "example" : {
+              "name" : "name of the webhook",
+              "description" : "more details about this webhook",
+              "url" : "url that will be visited by TAPICC server",
+              "eventType" : "taskCreated"
+            }
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "The requested resource",
+            "schema" : {
+              "$ref" : "#/definitions/webhook"
+            }
+          },
+          "404" : {
+            "description" : "Resource not found"
+          },
+          "500" : {
+            "description" : "Internal server error"
+          }
+        }
+      },
+      "delete" : {
+        "tags" : [ "Webhook" ],
+        "summary" : "Delete a Webhook",
+        "description" : "Delete a Webhook",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "webhookId",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "204" : {
+            "description" : "NoContent"
+          },
+          "404" : {
+            "description" : "Resource not found"
+          },
+          "500" : {
+            "description" : "Internal server error"
+          }
+        }
+      }
     }
   },
   "securityDefinitions" : {
@@ -974,6 +1126,44 @@
           "format" : "date-time"
         },
         "deliveredAt" : {
+          "type" : "string",
+          "format" : "date-time"
+        }
+      }
+    },
+    "webhook" : {
+      "required" : [ "eventType", "url" ],
+      "properties" : {
+        "id" : {
+          "type" : "integer",
+          "format" : "int32",
+          "description" : "(auto-generated)"
+        },
+        "name" : {
+          "type" : "string",
+          "format" : "string",
+          "description" : "name of the Webhook"
+        },
+        "description" : {
+          "type" : "string",
+          "format" : "string"
+        },
+        "url" : {
+          "type" : "string",
+          "format" : "string",
+          "description" : "url which the server will make a request to when an event occurs"
+        },
+        "eventType" : {
+          "type" : "string",
+          "format" : "string",
+          "description" : "type of event - if this event occurs, then the \"url\" will be requested by the TAPICC server",
+          "enum" : [ "taskCreated", "taskUpdated", "taskDeleted", "jobCreated", "jobUpdated", "jobDeleted", "inputCreated", "inputUpdated", "inputDeleted", "deliverableCreated", "deliverableUpdated", "deliverableDeleted" ]
+        },
+        "createdAt" : {
+          "type" : "string",
+          "format" : "date-time"
+        },
+        "updatedAt" : {
           "type" : "string",
           "format" : "date-time"
         }
