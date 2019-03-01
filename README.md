@@ -3,10 +3,8 @@
 
 
 ## Note
-this is a work in progress, some things needs to be done first so we can call this production ready.
-- [ ] swagger API definition version 1.0.0
-- [x] system accounts and authentication
-- [ ] automated tests written and implemented
+### !!! This implementation is out of sync with current version of swagger file !!!
+### !!! Only swagger file is being updated and not the TAPICC server implementation !!!
 
 ## Roadmap
 you can see issues/bugs/user stories prioritized in waffle.io [kanban board](https://waffle.io/GALAglobal/TAPICC-API-implementation)
