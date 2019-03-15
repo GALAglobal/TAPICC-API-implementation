@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/GALAglobal/TAPICC-API-implementation.svg?branch=master)](https://travis-ci.org/GALAglobal/TAPICC-API-implementation) [![Waffle.io - Columns and their card count](https://badge.waffle.io/GALAglobal/TAPICC-API-implementation.svg?columns=all)](https://waffle.io/GALAglobal/TAPICC-API-implementation)
+[![Build Status](https://travis-ci.org/GALAglobal/TAPICC-API-implementation.svg?branch=master)](https://travis-ci.org/GALAglobal/TAPICC-API-implementation)
 
 
 
@@ -8,7 +8,7 @@
 ### !!! Please consider the swagger file as a single source of truth !!!
 
 ## Roadmap
-you can see issues/bugs/user stories prioritized in waffle.io [kanban board](https://waffle.io/GALAglobal/TAPICC-API-implementation)
+you can see issues/bugs/user stories prioritized in our github projects kanban board https://github.com/GALAglobal/TAPICC-API-implementation/projects/1
 
 ## Installation
 download this repository
