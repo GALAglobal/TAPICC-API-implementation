@@ -928,11 +928,6 @@
           "type" : "string",
           "format" : "string"
         },
-        "dueAt" : {
-          "type" : "string",
-          "format" : "date-time",
-          "description" : "a date with a deadline"
-        },
         "submitter" : {
           "type" : "string",
           "format" : "string",
@@ -1116,6 +1111,11 @@
         "submittedAt" : {
           "type" : "string",
           "format" : "date-time"
+        },
+        "dueAt" : {
+          "type" : "string",
+          "format" : "date-time",
+          "description" : "a date with a deadline"
         },
         "createdAt" : {
           "type" : "string",
