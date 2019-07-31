@@ -1,15 +1,14 @@
-[![Build Status](https://travis-ci.org/GALAglobal/TAPICC-API-implementation.svg?branch=master)](https://travis-ci.org/GALAglobal/TAPICC-API-implementation) [![Waffle.io - Columns and their card count](https://badge.waffle.io/GALAglobal/TAPICC-API-implementation.svg?columns=all)](https://waffle.io/GALAglobal/TAPICC-API-implementation)
+[![Build Status](https://travis-ci.org/GALAglobal/TAPICC-API-implementation.svg?branch=master)](https://travis-ci.org/GALAglobal/TAPICC-API-implementation)
 
 
 
 ## Note
-this is a work in progress, some things needs to be done first so we can call this production ready.
-- [ ] swagger API definition version 1.0.0
-- [x] system accounts and authentication
-- [ ] automated tests written and implemented
+### !!! This implementation is out of sync with current version of swagger file !!!
+### !!! Only swagger file is being updated and not the TAPICC server implementation !!!
+### !!! Please consider the swagger file as a single source of truth !!!
 
 ## Roadmap
-you can see issues/bugs/user stories prioritized in waffle.io [kanban board](https://waffle.io/GALAglobal/TAPICC-API-implementation)
+you can see issues/bugs/user stories prioritized in our github projects kanban board https://github.com/GALAglobal/TAPICC-API-implementation/projects/1
 
 ## Installation
 download this repository
