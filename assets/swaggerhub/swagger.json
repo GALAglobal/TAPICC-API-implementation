@@ -22,6 +22,8 @@
     "name" : "Deliverable"
   }, {
     "name" : "Webhook"
+  }, {
+    "name" : "TIPP"
   } ],
   "schemes" : [ "http" ],
   "security" : [ {
@@ -892,6 +894,59 @@
         "responses" : {
           "204" : {
             "description" : "NoContent"
+          },
+          "404" : {
+            "description" : "Resource not found"
+          },
+          "500" : {
+            "description" : "Internal server error"
+          }
+        }
+      }
+    },
+    "/TIPP" : {
+      "post" : {
+        "tags" : [ "TIPP" ],
+        "summary" : "Uploads a TIPP package",
+        "description" : "Imports a package to TAPICC",
+        "consumes" : [ "multipart/form-data" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "envelope",
+          "in" : "formData",
+          "description" : "The TIPP envelope (zip file)",
+          "required" : true,
+          "type" : "file"
+        } ],
+        "responses" : {
+          "201" : {
+            "description" : "The requested resource"
+          },
+          "404" : {
+            "description" : "Resource not found"
+          },
+          "500" : {
+            "description" : "Internal server error"
+          }
+        }
+      }
+    },
+    "/TIPP/{taskId}" : {
+      "get" : {
+        "tags" : [ "TIPP" ],
+        "summary" : "Downloads a TIPP package",
+        "description" : "Exports a package from TAPICC",
+        "consumes" : [ "application/json" ],
+        "produces" : [ "application/json" ],
+        "parameters" : [ {
+          "name" : "taskId",
+          "in" : "path",
+          "required" : true,
+          "type" : "string"
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "The requested resource"
           },
           "404" : {
             "description" : "Resource not found"
