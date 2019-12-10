@@ -1030,7 +1030,7 @@
         },
         "fileType" : {
           "type" : "string",
-          "enum" : [ "bitext", "source", "instructions", "glossary", "TM", "reference", "zip", "report" ]
+          "enum" : [ "bitext", "source", "instructions", "glossary", "tm", "reference", "zip", "report" ]
         },
         "taskIds" : {
           "type" : "array",
@@ -1079,7 +1079,7 @@
         },
         "fileType" : {
           "type" : "string",
-          "enum" : [ "bitext", "source", "instructions", "glossary", "TM", "reference", "zip", "report" ]
+          "enum" : [ "bitext", "source", "instructions", "glossary", "tm", "reference", "zip", "report" ]
         },
         "taskId" : {
           "type" : "string"
@@ -1119,7 +1119,7 @@
         "type" : {
           "type" : "string",
           "format" : "string",
-          "enum" : [ "Translation", "Localization", "Internationalization", "Adaptation", "Linguistic editing", "Technical editing", "Proofreading", "Copyediting", "MT post-editing", "Reconciliation", "Review", "Review with LQA", "Terminology work", "Linguistic verification", "Technical verification", "Service linguistic task", "Transcription", "Retyping handwritten text", "Content creation", "Scoping", "Desktop publishing" ]
+          "enum" : [ "translation", "localization", "internationalization", "adaptation", "linguistic-editing", "technical-editing", "proofreading", "copyediting", "mt-post-editing", "reconciliation", "review", "review-with-lqa", "terminology-work", "linguistic-verification", "technical-verification", "service-linguistic-task", "transcription", "retyping-handwritten-text", "content-creation", "scoping", "desktop-publishing" ]
         },
         "sourceLanguage" : {
           "type" : "string",
