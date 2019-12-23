@@ -561,7 +561,7 @@
           "schema" : {
             "example" : {
               "jobId" : 1,
-              "inputId" : 1,
+              "inputIds" : [ 1 ],
               "type" : "translation",
               "targetLanguage" : "cz",
               "assignedTo" : "symfonie.com/43920149320"
@@ -630,7 +630,7 @@
           "schema" : {
             "example" : {
               "jobId" : 1,
-              "inputId" : 1,
+              "inputIds" : [ 1 ],
               "progress" : "paused",
               "type" : "translation",
               "targetLanguage" : "cz",
