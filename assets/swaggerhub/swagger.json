@@ -994,10 +994,10 @@
           "format" : "string",
           "description" : "external project id, as is defined on the external system"
         },
-        "inputs" : {
+        "inputIds" : {
           "type" : "array",
           "items" : {
-            "$ref" : "#/definitions/input"
+            "type" : "string"
           }
         },
         "closedAt" : {
