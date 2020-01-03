@@ -970,8 +970,7 @@
       "required" : [ "submitter" ],
       "properties" : {
         "id" : {
-          "type" : "integer",
-          "format" : "int32",
+          "type" : "string",
           "description" : "(auto-generated)"
         },
         "name" : {
@@ -1018,12 +1017,11 @@
     "input" : {
       "properties" : {
         "id" : {
-          "type" : "integer",
-          "format" : "int32",
+          "type" : "string",
           "description" : "(auto-generated)"
         },
         "jobId" : {
-          "type" : "integer"
+          "type" : "string"
         },
         "name" : {
           "type" : "string"
@@ -1067,12 +1065,11 @@
     "deliverable" : {
       "properties" : {
         "id" : {
-          "type" : "integer",
-          "format" : "int32",
+          "type" : "string",
           "description" : "(auto-generated)"
         },
         "jobId" : {
-          "type" : "integer"
+          "type" : "string"
         },
         "name" : {
           "type" : "string"
@@ -1112,8 +1109,7 @@
       "required" : [ "jobId", "type" ],
       "properties" : {
         "id" : {
-          "type" : "integer",
-          "format" : "int32",
+          "type" : "string",
           "description" : "(auto-generated)"
         },
         "type" : {
@@ -1149,7 +1145,7 @@
           "description" : "\"server name / id\" of the user who it is assigned to"
         },
         "jobId" : {
-          "type" : "integer"
+          "type" : "string"
         },
         "inputIds" : {
           "type" : "array",
@@ -1190,8 +1186,7 @@
       "required" : [ "eventType", "url" ],
       "properties" : {
         "id" : {
-          "type" : "integer",
-          "format" : "int32",
+          "type" : "string",
           "description" : "(auto-generated)"
         },
         "name" : {
